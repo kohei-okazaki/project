@@ -7,7 +7,7 @@
 
 作成した仮想環境で ▶ ボタン押下  
 「Open terminal」押下  
- ターミナルが出るので、作成したいプロジェクトまで移動して「django-admin startproject ${project_name}」を入力し、プロジェクトを初期化。  
+ ターミナルが出るので、作成したいプロジェクトまで移動して `django-admin startproject ${project_name}` を入力し、プロジェクトを初期化。  
  「asgi.py」や「settings.py」などがあるはず
 
 # プロジェクト起動方法
@@ -23,23 +23,35 @@
 
 # URL マッピング
 
-管理アプリ=http://127.0.0.1:8000/admin/login/
+管理アプリ=http://127.0.0.1:8000/admin/login/  
 勤怠アプリ=http://127.0.0.1:8000/kintai/login/
 
 # DB 設定
 
-pip install mysqlclient
-pip3 install PyMySQL
+`pip install mysqlclient`  
+`pip3 install PyMySQL`
 
 # マイグレーション手順
 
 1. models.py にテーブル定義の Entity を記述
 2. プロジェクトフォルダまで「Anaconda Terminal」で移動
-3. manage.py makemigrations ${application_name}
-4. python manage.py migrate
+3. `manage.py makemigrations ${application_name}`
+4. `python manage.py migrate`
 
 # 管理ユーザ作成
 
 1. プロジェクトフォルダまで「Anaconda Terminal」で移動
-2. python manage.py createsuperuser
+2. `python manage.py createsuperuser`
 3. username=admin, mail_address=admin@gmail.com, password=adminPass
+
+# Git への反映
+
+1. ファイルを作成後、SourceTree で「Local」->「Create」
+2. 作業フォルダ上を選択、リポジトリ名=「project」、「Git」
+3. 作成ボタン押下
+4. Github で「project」でリモートリポジトリを作成
+5. SourceTree から Git ターミナルを開く
+6. `$ git add \*`
+7. `$ git commit -m 'first commit'`
+8. `$ git remote add ${Github から取得したリポジトリ URL}`
+9. `$ git push ${Github から取得したリポジトリ URL}`
