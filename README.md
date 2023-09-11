@@ -8,7 +8,7 @@
 作成した仮想環境で ▶ ボタン押下  
 「Open terminal」押下  
  ターミナルが出るので、作成したいプロジェクトまで移動して `django-admin startproject ${project_name}` を入力し、プロジェクトを初期化。  
- 「asgi.py」や「settings.py」などがあるはず
+ 「asgi.py」や「settings.py」などがあるはず。
 
 # プロジェクト起動方法
 
@@ -19,7 +19,7 @@
 # アプリケーションの作り方
 
 1. プロジェクトフォルダまで「Anaconda Terminal」で移動
-2. 「python manage.py startapp ${application_name}」実行
+2. `python manage.py startapp ${application_name}` 実行
 
 # URL マッピング
 
@@ -35,7 +35,7 @@
 
 1. models.py にテーブル定義の Entity を記述
 2. プロジェクトフォルダまで「Anaconda Terminal」で移動
-3. `manage.py makemigrations ${application_name}`
+3. `python manage.py makemigrations ${application_name}`
 4. `python manage.py migrate`
 
 # 管理ユーザ作成
