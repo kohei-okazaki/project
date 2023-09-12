@@ -12,20 +12,23 @@
     <link rel="icon" type="image/png" href="{% static 'icon/favicon.ico' %}" />
   </head>
   <body>
-    <h1>ログイン</h1>
-    <form method="post" action="{% url 'index' %}">
+    <h1>ユーザ作成画面</h1>
+    <form method="post" action=" {% url 'user_create' %}">
       {% csrf_token %}
-      <div class="mb-3">
-        <label for="seq_user_id" class="form-label">ユーザID</label>
-        <input id="seq_user_id" class="form-control" name="seq_user_id" />
-      </div>
       <div class="mb-3">
         <label for="password" class="form-label">パスワード</label>
         <input id="password" class="form-control" name="password" />
       </div>
-      <input type="submit" value="ログイン" />
+      <div class="mb-3">
+        <label for="company_cd" class="form-label">企業コード</label>
+        <input id="company_cd" class="form-control" name="company_cd" />
+      </div>
+      <div class="mb-3">
+        <label for="division_cd" class="form-label">部署コード</label>
+        <input id="division_cd" class="form-control" name="division_cd" />
+      </div>
+      <input type="submit" value="作成" />
     </form>
-    <a href="{% url 'user_create' %}">ユーザ作成</a>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
   </body>

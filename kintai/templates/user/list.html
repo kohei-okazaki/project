@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>勤怠管理アプリ</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/bootstrap.min.css' %}"
+    />
+    <link rel="icon" type="image/png" href="{% static 'icon/favicon.ico' %}" />
+  </head>
+  <body>
+    <h1>ユーザ一覧画面</h1>
+
+    <div>---</div>
+    <table>
+      <tr>
+        <th></th>
+      </tr>
+      {% for user in users %}
+      <tr>
+        <td>{{ user.seq_user_id }}</td>
+        <td>{{ user.password }}</td>
+        <td>{{ user.company_cd }}</td>
+        <td>{{ user.reg_date }}</td>
+        <td>{{ user.update_date }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

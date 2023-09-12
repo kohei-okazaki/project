@@ -29,14 +29,13 @@ def user_list(request):
 
 def user_create(request):
     # ユーザ作成
-    params = {
-        "form": UserCreateForm()
-    }
-
-    if (request.method == "POST"):
-        input_password = request.POST["password"]
-        input_company_cd = request.POST["company_cd"]
-        user = UserData(password=input_password, company_cd=input_company_cd)
+    if (request.method == "GET") :
+        params = {
+            "form": UserCreateForm()
+        }
+    else:
+        obj = UserData()
+        user = UserCreateForm(request.POST, instance = obj)
         user.save()
         return redirect(to="login")
 
