@@ -8,3 +8,8 @@ class UserCreateForm(forms.ModelForm):
     class Meta:
         model = UserData
         fields = ["password", "company_cd", "division_cd"]
+
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = UserData
+        fields = ["password"]

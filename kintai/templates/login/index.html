@@ -3,29 +3,37 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
-    <title>勤怠管理アプリ</title>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'css/bootstrap.min.css' %}"
-    />
+    <title>ログイン | 勤怠管理アプリ</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/app/layout.css' %}"/>
     <link rel="icon" type="image/png" href="{% static 'icon/favicon.ico' %}" />
   </head>
   <body>
-    <h1>ログイン</h1>
-    <form method="post" action="{% url 'index' %}">
-      {% csrf_token %}
-      <div class="mb-3">
-        <label for="seq_user_id" class="form-label">ユーザID</label>
-        <input id="seq_user_id" class="form-control" name="seq_user_id" />
+    <div class="container">
+      <div class="space-50"></div>
+      <div class="login-frame">
+        <div class="space-40"></div>
+        <form method="post" action="{% url 'index' %}">
+          {% csrf_token %}
+          <div class="mb-3">
+            <input id="seq_user_id" class="form-control bg-light placeholder" name="seq_user_id" placeholder="ユーザID" />
+          </div>
+          <div class="mb-3">
+            <input id="password" class="form-control bg-light placeholder" name="password" placeholder="パスワード" />
+          </div>
+          <div class="mb-3">
+            <input type="submit" class="btn btn-primary login-button bold" value="ログイン" />
+          </div>
+        </form>
+        <div class="space-10"></div>
+        <a class="hide-anker navy user-password-check-message" href="{% url 'user_create' %}">パスワードを忘れた場合</a>
+        <div class="space-10"></div>
       </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">パスワード</label>
-        <input id="password" class="form-control" name="password" />
+      <div class="space-10"></div>
+      <div class="login-frame">
+        <p class="user-create-message">アカウントをお持ちでないですか？<a class="hide-anker blue bold" href="{% url 'user_create' %}">登録する</a></p>
       </div>
-      <input type="submit" value="ログイン" />
-    </form>
-    <a href="{% url 'user_create' %}">ユーザ作成</a>
+    </div>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
   </body>

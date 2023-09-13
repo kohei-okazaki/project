@@ -1,0 +1,11 @@
+{% extends 'layout.html' %} 
+{% block title %}ユーザ編集{% endblock %} 
+{% block contents %}
+  <h2>ユーザ編集</h2>
+
+  <div>---</div>
+  <form action="{% url 'user_edit' seqUserId %}">
+    {% csrf_token %}
+    <input type="submit" value="編集"></input>
+  </form>
+{% endblock %}

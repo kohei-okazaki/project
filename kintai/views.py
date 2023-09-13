@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .forms import UserCreateForm
+from .forms import UserCreateForm, UserEditForm
 from .models import UserData
 
 
@@ -19,7 +19,7 @@ def index(request):
 
 
 def user_list(request):
-    # ユーザの一覧
+    # ユーザ一覧
     users = UserData.objects.all()
     params = {
         "users": users
@@ -40,3 +40,18 @@ def user_create(request):
         return redirect(to="login")
 
     return render(request, "user/create.html", params)
+
+def user_edit(request, input_seq_user_id):
+    # ユーザ編集
+    oldUser = UserData.objects.get(seq_user_id=input_seq_user_id)
+    if (request.method == "POST") :
+        user = UserEditForm(request.POST, instance = oldUser)
+        user.save()
+        return redirect("user/edit/" + input_seq_user_id)
+    
+    params = {
+        "seqUserId": input_seq_user_id,
+        "form": UserEditForm(instance = oldUser),
+    }
+
+    return render(request, "user/edit.html", params)

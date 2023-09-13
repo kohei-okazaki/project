@@ -1,0 +1,75 @@
+/* 下線を消す */
+.hide-anker {
+    text-decoration: none;
+}
+
+/* 文字色:青 */
+.blue {
+    color: #0095f6;
+}
+
+/* 文字色:紺 */
+.navy {
+    color: #00376b;
+}
+
+/* 太文字化 */
+.bold {
+    font-weight: bold;
+}
+
+/* layout調整用 */
+.space-50 {
+    margin: 50px;
+}
+
+/* layout調整用 */
+.space-40 {
+    margin: 40px;
+}
+
+/* layout調整用 */
+.space-30 {
+    margin: 30px;
+}
+
+/* layout調整用 */
+.space-20 {
+    margin: 20px;
+}
+
+/* layout調整用 */
+.space-10 {
+    margin: 10px;
+}
+
+/* ログイン枠 */
+.login-frame {
+    width: 320px;
+    align-items: center;
+    border: 1px solid;
+    border-color: #dbdbdb;
+    border-radius: 1px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    font-size: 100%;
+    margin: 0 auto;
+    padding: 10px 0px 10px 0px;
+    position: relative;
+    vertical-align: baseline;
+}
+
+.login-button {
+    width: 100%;
+}
+
+.user-password-check-message {
+    font-size: 12px;
+}
+
+.user-create-message {
+    margin: 5px;
+    font-size: 14px;
+}
