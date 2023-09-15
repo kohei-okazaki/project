@@ -6,17 +6,17 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+# ログイン
 def login(request):
-    # ログイン
+    
 
     # セッション削除
     request.session.flush()
 
     return render(request, "login/index.html")
 
-
+# ログイン後のメニュー
 def index(request):
-    # ログイン後のメニュー
 
     logger.debug("seqUserId" in request.session)
 
@@ -45,9 +45,8 @@ def index(request):
 
     return render(request, "index.html")
 
-
+# ユーザ作成
 def user_create(request):
-    # ユーザ作成
 
     if (request.method == "GET") :
         params = {
@@ -61,20 +60,18 @@ def user_create(request):
 
     return render(request, "user/create.html", params)
 
-
+# ユーザ編集
 def user_edit(request):
-    # ユーザ編集
 
     sessionSeqUserId = request.session["seqUserId"]
-    oldUser = UserData.objects.get(seq_user_id=sessionSeqUserId)
+    currentUser = UserData.objects.get(seq_user_id=sessionSeqUserId)
     if (request.method == "POST") :
-        user = UserEditForm(request.POST, instance = oldUser)
+        user = UserEditForm(request.POST, instance = currentUser)
         user.save()
         return render(request, "user/edit.html")
     
     params = {
-        "seqUserId": sessionSeqUserId,
-        "form": UserEditForm(instance = oldUser),
+        "form": UserEditForm(instance = currentUser),
     }
 
     return render(request, "user/edit.html", params)

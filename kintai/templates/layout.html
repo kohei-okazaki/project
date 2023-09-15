@@ -10,7 +10,7 @@
   </head>
   <body>
     {% comment %} ヘッダ設定 {% endcomment %}
-    <div class="header bg-gradient">
+    <div id="header" class="header bg-gradient">
       <div class="header-title">勤怠管理アプリ</div>
       <div class="header-seq-user-id">ユーザID:{{ request.session.seqUserId }}</div>
       <div class="header-logout">
@@ -40,16 +40,38 @@
       </div>
 
       {% comment %} 各画面のコンテンツ設定 {% endcomment %}
-      <div class="contents-main">
-        {% block contents %}{% endblock %}
-      </div>
+      <div class="contents-main">{% block contents %}{% endblock %}</div>
     </div>
 
     {% comment %} フッタ設定 {% endcomment %}
     <div class="footer">
-      <div class="footer-fix">@Copyright KINTAI {% now "Y" %}</div>
+      <div class="footer-fix">&copy; copyright. KINTAI {% now "Y" %}</div>
     </div>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script>
+      function fixedAnime() {
+        var headerH = $("#header").outerHeight(true);
+        var scroll = $(window).scrollTop();
+        if (scroll >= headerH) {
+          //headerの高さ以上になったら
+          $("#header").addClass("header-fix");
+        } else {
+          //それ以外は
+          $("#header").removeClass("header-fix");
+        }
+      }
+
+      // 画面をスクロールをしたら動かしたい場合
+      $(window).scroll(function () {
+        fixedAnime();
+      });
+
+      // ページが読み込まれたらすぐに動かしたい場合
+      $(window).on('load', function () {
+        fixedAnime();
+      });
+    </script>
   </body>
 </html>

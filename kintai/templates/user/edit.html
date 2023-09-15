@@ -1,11 +1,42 @@
 {% extends 'layout.html' %} 
 {% block title %}ユーザ編集{% endblock %} 
 {% block contents %}
-  <h2>ユーザ編集</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2>ユーザ編集</h2>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-12">
+      <form action="{% url 'user_edit' %}" method="post">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-3">
+            <label for="seqUserId" class="form-label">ユーザID</label>
+          </div>
+          <div class="col-9">{{ request.session.seqUserId }}</div>
+        </div>
 
-  <div>---</div>
-  <form action="{% url 'user_edit' %}">
-    {% csrf_token %}
-    <input type="submit" value="編集"></input>
-  </form>
+        <div class="row">
+          <div class="col-3">
+            <label for="password" class="form-label">パスワード</label>
+          </div>
+          <div class="col-9">
+            <input class="form-control bg-light placeholder" type="password" name="password">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <input type="submit" class="btn btn-primary bold" value="編集"></input>
+          </div>
+          <div class="col-9"></div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock %}
