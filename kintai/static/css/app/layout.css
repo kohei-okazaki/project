@@ -13,6 +13,11 @@
     color: #00376b;
 }
 
+/* layout:文字色:白 */
+.white {
+    color: white;
+}
+
 /* layout:太文字化 */
 .bold {
     font-weight: bold;
@@ -46,6 +51,39 @@
 /* layout:ヘッダ */
 div.header {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #a725f1;
+    color: white;
+}
+
+div.header-contents-title {
+    font-size: 23px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    padding-left: 11px;
+    padding-right: 50px;
+}
+
+div.header-contents-seq-user-id {
+    padding-top: 17px;
+    padding-bottom: 11px;
+    padding-left: 11px;
+    padding-right: 11px;
+    font-size: 14px;
+    margin-left: auto;
+}
+
+div.header-contents-logout {
+    padding-top: 17px;
+    padding-bottom: 11px;
+    padding-left: 11px;
+    padding-right: 11px;
+    font-size: 14px;
+}
+
+div.contents {
+    padding-left: 50px;
 }
 
 /* layout:フッタ */

@@ -10,14 +10,14 @@
   </head>
   <body>
     {% comment %} ヘッダ設定 {% endcomment %}
-    <div class="header">
-      <div class="">勤怠管理アプリ</div>
-      <div class=""></div>
-      <div class="">ユーザID:{{ request.session.seqUserId }}</div>
-      <div class="">ログアウト</div>
+    <div class="header bg-gradient">
+      <div class="header-contents-title">勤怠管理アプリ</div>
+      <div class="header-contents-seq-user-id">ユーザID:{{ request.session.seqUserId }}</div>
+      <div class="header-contents-logout"><a class="hide-anker white" href="{% url 'login' %}">ログアウト</a></div>
     </div>
+
     {% comment %} 各画面のコンテンツ設定 {% endcomment %}
-    <div class="">
+    <div class="contents">
       {% block contents %}{% endblock %}
     </div>
 
