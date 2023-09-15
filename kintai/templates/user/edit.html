@@ -7,7 +7,7 @@
       <h2>ユーザ編集</h2>
     </div>
   </div>
-  
+
   <div class="row">
     <div class="col-12">
       <form action="{% url 'user_edit' %}" method="post">
@@ -16,7 +16,7 @@
           <div class="col-3">
             <label for="seqUserId" class="form-label">ユーザID</label>
           </div>
-          <div class="col-9">{{ request.session.seqUserId }}</div>
+          <div class="col-9">{{ request.session.seq_user_id }}</div>
         </div>
 
         <div class="row">
@@ -25,6 +25,18 @@
           </div>
           <div class="col-9">
             <input class="form-control bg-light placeholder" type="password" name="password">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <label for="companyCd" class="form-label">企業コード</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <label for="divisionCd" class="form-label">ユーザID</label>
           </div>
         </div>
 

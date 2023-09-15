@@ -1,8 +1,13 @@
-from django.forms.models import ModelForm
-from django.forms import Form
 from django import forms
 from .models import UserData
 
+
+class LoginForm(forms.Form):
+
+    # ユーザID
+    seq_user_id = forms.IntegerField(required=True, label="ユーザID")
+    # パスワード
+    password = forms.CharField(required=True, label="パスワード")
 
 class UserCreateForm(forms.ModelForm):
     class Meta:
