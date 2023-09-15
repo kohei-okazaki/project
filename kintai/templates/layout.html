@@ -13,13 +13,26 @@
     <div class="header bg-gradient">
       <div class="header-contents-title">勤怠管理アプリ</div>
       <div class="header-contents-seq-user-id">ユーザID:{{ request.session.seqUserId }}</div>
-      <div class="header-contents-logout"><a class="hide-anker white" href="{% url 'login' %}">ログアウト</a></div>
+      <div class="header-contents-logout">
+        <a class="hide-anker white" href="{% url 'login' %}">ログアウト</a>
+      </div>
+    </div>
+
+    {% comment %} メニューリンク設定 {% endcomment %}
+    <div>
+      <div class="menuicon">
+        <a href="{% url 'index' %}" data-text="お気に入り"><img src="{% static 'icon/icon-home.png' %}" /></a>
+      </div>
+      <div class="menuicon">
+        <a href="{% url 'index' %}" data-text="お気に入り"><img src="{% static 'icon/icon-time.png' %}" /></a>
+      </div>
+      <div class="menuicon">
+        <a href="{% url 'user_edit' %}" data-text="お気に入り"><img src="{% static 'icon/icon-setting.png' %}" /></a>
+      </div>
     </div>
 
     {% comment %} 各画面のコンテンツ設定 {% endcomment %}
-    <div class="contents">
-      {% block contents %}{% endblock %}
-    </div>
+    <div class="contents">{% block contents %}{% endblock %}</div>
 
     {% comment %} フッタ設定 {% endcomment %}
     <div class="footer">

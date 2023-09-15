@@ -146,14 +146,13 @@ LOGGING = {
     # フォーマット設定
     "formatters": {
         "verbose": {
-            "format": "%(asctime)s %(levelname)s %(module)s "
-                      "%(process)d %(thread)d %(message)s"
+            "format": "%(asctime)s %(levelname)s | %(thread)d %(message)s"
         },
     },
     # ハンドラ設定
     "handlers": {
         "console": {
-            "level": "INFO",
+            "level": "DEBUG",
             "filters": ["require_debug_true"],
             "class": "logging.StreamHandler",
             "formatter": "verbose",

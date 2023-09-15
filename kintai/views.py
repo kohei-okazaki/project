@@ -8,16 +8,31 @@ logger = logging.getLogger(__name__)
 
 def login(request):
     # ログイン
+
+    # セッション削除
+    request.session.flush()
+
     return render(request, "login/index.html")
 
 
 def index(request):
     # ログイン後のメニュー
 
+    logger.debug("seqUserId" in request.session)
+
+    if ("seqUserId" in request.session) :
+        # ログイン済の場合
+        logger.info(request.session["seqUserId"])
+        return render(request, "index.html")
+
+    if (request.method == "GET") :
+        return render(request, "login/index.html")
+    
+    
     # USER_DATAを検索し、対象のユーザが登録されているか確認する
     seqUserId = request.POST["seq_user_id"]
-    user = UserData.objects.get(seq_user_id=seqUserId)
-    logger.info(seqUserId)
+    user = UserData.objects.get(seq_user_id = seqUserId)
+    logger.debug(user)
 
     if (user is None):
         params = {
@@ -31,17 +46,9 @@ def index(request):
     return render(request, "index.html")
 
 
-def user_list(request):
-    # ユーザ一覧
-    users = UserData.objects.all()
-    params = {
-        "users": users
-    }
-    return render(request, "user/list.html", params)
-
-
 def user_create(request):
     # ユーザ作成
+
     if (request.method == "GET") :
         params = {
             "form": UserCreateForm()
@@ -54,16 +61,19 @@ def user_create(request):
 
     return render(request, "user/create.html", params)
 
-def user_edit(request, input_seq_user_id):
+
+def user_edit(request):
     # ユーザ編集
-    oldUser = UserData.objects.get(seq_user_id=input_seq_user_id)
+
+    sessionSeqUserId = request.session["seqUserId"]
+    oldUser = UserData.objects.get(seq_user_id=sessionSeqUserId)
     if (request.method == "POST") :
         user = UserEditForm(request.POST, instance = oldUser)
         user.save()
-        return redirect("user/edit/" + input_seq_user_id)
+        return render(request, "user/edit.html")
     
     params = {
-        "seqUserId": input_seq_user_id,
+        "seqUserId": sessionSeqUserId,
         "form": UserEditForm(instance = oldUser),
     }
 
