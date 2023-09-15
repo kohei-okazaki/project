@@ -1,49 +1,63 @@
-/* 下線を消す */
+/* layout:下線を消す */
 .hide-anker {
     text-decoration: none;
 }
 
-/* 文字色:青 */
+/* layout:文字色:青 */
 .blue {
     color: #0095f6;
 }
 
-/* 文字色:紺 */
+/* layout:文字色:紺 */
 .navy {
     color: #00376b;
 }
 
-/* 太文字化 */
+/* layout:太文字化 */
 .bold {
     font-weight: bold;
 }
 
-/* layout調整用 */
+/* layout:幅調整用 */
 .space-50 {
     margin: 50px;
 }
 
-/* layout調整用 */
+/* layout:幅調整用 */
 .space-40 {
     margin: 40px;
 }
 
-/* layout調整用 */
+/* layout:幅調整用 */
 .space-30 {
     margin: 30px;
 }
 
-/* layout調整用 */
+/* layout:幅調整用 */
 .space-20 {
     margin: 20px;
 }
 
-/* layout調整用 */
+/* layout:幅調整用 */
 .space-10 {
     margin: 10px;
 }
 
-/* ログイン枠 */
+/* layout:ヘッダ */
+div.header {
+    width: 100%;
+}
+
+/* layout:フッタ */
+div.footer {
+    background-color: #b4b2b2;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 5px;
+}
+
+/* login:ログイン枠 */
 .login-frame {
     width: 320px;
     align-items: center;
@@ -61,14 +75,17 @@
     vertical-align: baseline;
 }
 
+/* login:ボタン幅 */
 .login-button {
     width: 100%;
 }
 
+/* login:メッセージ設定1 */
 .user-password-check-message {
     font-size: 12px;
 }
 
+/* login:メッセージ設定2 */
 .user-create-message {
     margin: 5px;
     font-size: 14px;

@@ -1,7 +1,10 @@
 from django.shortcuts import redirect, render
 from .forms import UserCreateForm, UserEditForm
 from .models import UserData
+import logging
 
+
+logger = logging.getLogger(__name__)
 
 def login(request):
     # ログイン
@@ -11,11 +14,21 @@ def login(request):
 def index(request):
     # ログイン後のメニュー
 
-    params = {
-        "seq_user_id": request.POST["seq_user_id"],
-        "password": request.POST["password"],
-    }
-    return render(request, "index.html", params)
+    # USER_DATAを検索し、対象のユーザが登録されているか確認する
+    seqUserId = request.POST["seq_user_id"]
+    user = UserData.objects.get(seq_user_id=seqUserId)
+    logger.info(seqUserId)
+
+    if (user is None):
+        params = {
+            "errorMessage": "ユーザが存在しません"
+        }
+        return render(request, "login/index.html", params)
+
+    # セッションにユーザIDを保持
+    request.session["seqUserId"] = seqUserId
+
+    return render(request, "index.html")
 
 
 def user_list(request):

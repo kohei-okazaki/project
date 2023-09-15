@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     "kintai",
 ]
 
+# セッションの保存先をキャッシュに変更
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -113,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
 LANGUAGE_CODE = "ja"
-TIME_ZONE = 'Asia/Tokyo'
+TIME_ZONE = "Asia/Tokyo"
 USE_I18N = True
 USE_TZ = True
 
@@ -179,9 +182,9 @@ LOGGING = {
             "propagate": False,
         },
         # 追加
-        "app": {
+        "kintai": {
             "handlers": ["console", "file"],
-            "level": "INFO",
+            "level": "DEBUG",
             "propagate": False,
         },
     }
