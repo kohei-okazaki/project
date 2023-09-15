@@ -1,7 +1,7 @@
+import logging
 from django.shortcuts import redirect, render
 from .forms import UserCreateForm, UserEditForm
 from .models import UserData
-import logging
 
 
 logger = logging.getLogger(__name__)

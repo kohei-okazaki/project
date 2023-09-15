@@ -12,14 +12,18 @@
     {% comment %} ヘッダ設定 {% endcomment %}
     <div id="header" class="header bg-gradient">
       <div class="header-title">勤怠管理アプリ</div>
+      {% if request.session.seqUserId %}
       <div class="header-seq-user-id">ユーザID:{{ request.session.seqUserId }}</div>
       <div class="header-logout">
         <a class="hide-anker white" href="{% url 'login' %}">ログアウト</a>
       </div>
+      {% endif %}
     </div>
 
     {% comment %} コンテンツ大枠 {% endcomment %}
     <div class="contents">
+
+      {% if request.session.seqUserId %}
       {% comment %} メニューリンク設定 {% endcomment %}
       <div class="contents-menu bg-gradient">
         <div class="contents-menu-icon">
@@ -38,6 +42,7 @@
           </a>
         </div>
       </div>
+      {% endif %}
 
       {% comment %} 各画面のコンテンツ設定 {% endcomment %}
       <div class="contents-main">{% block contents %}{% endblock %}</div>

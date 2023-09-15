@@ -1,31 +1,23 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <title>勤怠管理アプリ</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
-    <link rel="icon" type="image/png" href="{% static 'icon/favicon.ico' %}" />
-  </head>
-  <body>
-    <h1>ユーザ作成</h1>
-    <form method="post" action=" {% url 'user_create' %}">
-      {% csrf_token %}
-      <div class="mb-3">
-        <label for="password" class="form-label">パスワード</label>
-        <input id="password" class="form-control" name="password" />
-      </div>
-      <div class="mb-3">
-        <label for="company_cd" class="form-label">企業コード</label>
-        <input id="company_cd" class="form-control" name="company_cd" />
-      </div>
-      <div class="mb-3">
-        <label for="division_cd" class="form-label">部署コード</label>
-        <input id="division_cd" class="form-control" name="division_cd" />
-      </div>
-      <input type="submit" value="作成" />
-    </form>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-  </body>
-</html>
+{% extends "layout.html" %}
+{% block title %}ユーザ作成{% endblock %}
+{% block contents %}
+<div class="container">
+  <div class="space-50"></div>
+  <div class="login-frame">
+  <form method="post" action=" {% url 'user_create' %}">
+    {% csrf_token %}
+    <div class="mb-3">
+      <input id="password" class="form-control bg-light placeholder" name="password" placeholder="パスワード" />
+    </div>
+    <div class="mb-3">
+      <input id="company_cd" class="form-control bg-light placeholder" name="company_cd" placeholder="企業コード" />
+    </div>
+    <div class="mb-3">
+      <input id="division_cd" class="form-control bg-light placeholder" name="division_cd" placeholder="部署コード" />
+    </div>
+    <input type="submit" class="btn btn-primary login-button bold" value="作成" />
+  </form>
+  <div class="space-10"></div>
+  </div>
+</div>
+{% endblock %}

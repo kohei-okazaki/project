@@ -1,3 +1,4 @@
+import time
 from django.db import models
 from django.db.models import Model
 
@@ -16,8 +17,8 @@ class UserData(Model):
             ",PASSWORD=" + str(self.password) + \
             ",COMPANY_CD=" + str(self.company_cd) + \
             ",DIVISION_CD=" + str(self.division_cd) + \
-            ",REG_DATE=" + str(self.reg_date) + \
-            ",UPDATE_DATE=" + str(self.update_date)
+            ",REG_DATE=" + self.reg_date.strftime('%Y/%m/%d %H:%M:%S') + \
+            ",UPDATE_DATE=" + self.update_date.strftime('%Y/%m/%d %H:%M:%S')
 
     class Meta:
         db_table = "USER_DATA"
@@ -45,8 +46,8 @@ class DailyUserWorkData(Model):
             ",WORK_START_DATE=" + str(self.work_start_date) + \
             ",WORK_END_DATE=" + str(self.work_end_date) + \
             ",ACTUAL_WORK_TIME=" + str(self.actual_work_date) + \
-            ",REG_DATE=" + str(self.reg_date) + \
-            ",UPDATE_DATE=" + str(self.update_date)
+            ",REG_DATE=" + self.reg_date.strftime('%Y/%m/%d %H:%M:%S') + \
+            ",UPDATE_DATE=" + self.update_date.strftime('%Y/%m/%d %H:%M:%S')
 
     class Meta:
         db_table = "DAILY_USER_WORK_DATA"
@@ -72,8 +73,8 @@ class OntimeMt(Model):
             ",START_MINUTE=" + str(self.start_minute) + \
             ",END_HOUR=" + str(self.end_hour) + \
             ",END_MINUTE=" + str(self.end_minute) + \
-            ",REG_DATE=" + str(self.reg_date) + \
-            ",UPDATE_DATE=" + str(self.update_date)
+            ",REG_DATE=" + self.reg_date.strftime('%Y/%m/%d %H:%M:%S') + \
+            ",UPDATE_DATE=" + self.update_date.strftime('%Y/%m/%d %H:%M:%S')
 
     class Meta:
         db_table = "ONTIME_MT"
@@ -93,8 +94,8 @@ class CompanyMt(Model):
         return "COMPANY_MT=>"\
             "COMPANY_CD=" + str(self.company_cd) + \
             ",NAME=" + str(self.name) + \
-            ",REG_DATE=" + str(self.reg_date) + \
-            ",UPDATE_DATE=" + str(self.update_date)
+            ",REG_DATE=" + self.reg_date.strftime('%Y/%m/%d %H:%M:%S') + \
+            ",UPDATE_DATE=" + self.update_date.strftime('%Y/%m/%d %H:%M:%S')
 
     class Meta:
         db_table = "COMPANY_MT"
@@ -110,8 +111,8 @@ class DivisionMt(Model):
         return "DIVISION_MT=>"\
             "DIVISION_CD=" + str(self.division_cd) + \
             ",NAME=" + str(self.name) + \
-            ",REG_DATE=" + str(self.reg_date) + \
-            ",UPDATE_DATE=" + str(self.update_date)
+            ",REG_DATE=" + self.reg_date.strftime('%Y/%m/%d %H:%M:%S') + \
+            ",UPDATE_DATE=" + self.update_date.strftime('%Y/%m/%d %H:%M:%S')
 
     class Meta:
         db_table = "DIVISION_MT"
