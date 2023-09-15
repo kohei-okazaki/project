@@ -8,7 +8,6 @@ logger = logging.getLogger(__name__)
 
 # ログイン
 def login(request):
-    
 
     # セッション削除
     request.session.flush()
@@ -17,8 +16,6 @@ def login(request):
 
 # ログイン後のメニュー
 def index(request):
-
-    logger.debug("seqUserId" in request.session)
 
     if ("seqUserId" in request.session) :
         # ログイン済の場合
@@ -52,13 +49,13 @@ def user_create(request):
         params = {
             "form": UserCreateForm()
         }
-    else:
-        obj = UserData()
-        user = UserCreateForm(request.POST, instance = obj)
-        user.save()
-        return redirect(to="login")
+        return render(request, "user/create.html", params)
+    
+    obj = UserData()
+    user = UserCreateForm(request.POST, instance = obj)
+    user.save()
 
-    return render(request, "user/create.html", params)
+    return redirect(to="login")
 
 # ユーザ編集
 def user_edit(request):

@@ -23,6 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-*wb*vqt7bg8wizzkay2&a1yxwci8t!b8_tw2_)dqqf5uj3dq^b"
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# Prod:False, Dev=True
+# ただし、404エラーなどの共通画面を出すのにFalseにしないといけなくそうすると
+# 静的ファイルが読まれないので、
+# ・DEBUG = False
+# ・ALLOWED_HOSTS = ['127.0.0.1']
+# ・runserver --insecure で起動する
 DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1']
