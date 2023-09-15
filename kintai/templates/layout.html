@@ -11,9 +11,9 @@
   <body>
     {% comment %} ヘッダ設定 {% endcomment %}
     <div class="header bg-gradient">
-      <div class="header-contents-title">勤怠管理アプリ</div>
-      <div class="header-contents-seq-user-id">ユーザID:{{ request.session.seqUserId }}</div>
-      <div class="header-contents-logout">
+      <div class="header-title">勤怠管理アプリ</div>
+      <div class="header-seq-user-id">ユーザID:{{ request.session.seqUserId }}</div>
+      <div class="header-logout">
         <a class="hide-anker white" href="{% url 'login' %}">ログアウト</a>
       </div>
     </div>

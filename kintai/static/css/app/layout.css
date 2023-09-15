@@ -1,3 +1,79 @@
+html,
+body {
+    height: 100%;
+}
+
+/* layout:ヘッダ */
+div.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #a725f1;
+    color: white;
+}
+
+div.header-fix {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+}
+
+div.header-title {
+    font-size: 23px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    padding-left: 11px;
+    padding-right: 50px;
+}
+
+div.header-seq-user-id {
+    padding-top: 17px;
+    padding-bottom: 11px;
+    padding-left: 11px;
+    padding-right: 11px;
+    font-size: 14px;
+    margin-left: auto;
+}
+
+div.header-logout {
+    padding-top: 17px;
+    padding-bottom: 11px;
+    padding-left: 11px;
+    padding-right: 11px;
+    font-size: 14px;
+}
+
+div.contents {
+    height: 91%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+div.contents-menu {
+    height: 100%;
+    background-color: #a725f1;
+}
+
+div.contents-menu-icon {
+    padding: 11px;
+}
+
+div.contents-main {
+    padding-top: 20px;
+    flex-grow: 1;
+}
+
+/* layout:フッタ */
+div.footer {
+    background-color: #b4b2b2;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 5px;
+}
+
 /* layout:下線を消す */
 .hide-anker {
     text-decoration: none;
@@ -46,78 +122,6 @@
 /* layout:幅調整用 */
 .space-10 {
     margin: 10px;
-}
-
-html {
-    height: 100%;
-}
-
-body {
-    height: 100%;
-}
-
-/* layout:ヘッダ */
-div.header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    background-color: #a725f1;
-    color: white;
-}
-
-div.header-contents-title {
-    font-size: 23px;
-    padding-top: 11px;
-    padding-bottom: 11px;
-    padding-left: 11px;
-    padding-right: 50px;
-}
-
-div.header-contents-seq-user-id {
-    padding-top: 17px;
-    padding-bottom: 11px;
-    padding-left: 11px;
-    padding-right: 11px;
-    font-size: 14px;
-    margin-left: auto;
-}
-
-div.header-contents-logout {
-    padding-top: 17px;
-    padding-bottom: 11px;
-    padding-left: 11px;
-    padding-right: 11px;
-    font-size: 14px;
-}
-
-div.contents {
-    height: 91%;
-    display: flex;
-    justify-content: flex-start;
-}
-
-div.contents-menu {
-    height: 100%;
-    background-color: #a725f1;
-}
-
-div.contents-menu-icon {
-    padding: 11px;
-}
-
-div.contents-main {
-    margin-right: auto;
-    padding-top: 20px;
-    padding-left: 20px;
-}
-
-/* layout:フッタ */
-div.footer {
-    background-color: #b4b2b2;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    padding: 5px;
 }
 
 /* login:ログイン枠 */
