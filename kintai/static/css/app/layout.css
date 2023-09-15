@@ -48,6 +48,14 @@
     margin: 10px;
 }
 
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
 /* layout:ヘッダ */
 div.header {
     width: 100%;
@@ -82,8 +90,25 @@ div.header-contents-logout {
     font-size: 14px;
 }
 
-div.menuicon {
+div.contents {
+    height: 91%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+div.contents-menu {
+    height: 100%;
+    background-color: #a725f1;
+}
+
+div.contents-menu-icon {
     padding: 11px;
+}
+
+div.contents-main {
+    margin-right: auto;
+    padding-top: 20px;
+    padding-left: 20px;
 }
 
 /* layout:フッタ */

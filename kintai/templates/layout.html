@@ -18,21 +18,32 @@
       </div>
     </div>
 
-    {% comment %} メニューリンク設定 {% endcomment %}
-    <div>
-      <div class="menuicon">
-        <a href="{% url 'index' %}" data-text="お気に入り"><img src="{% static 'icon/icon-home.png' %}" /></a>
+    {% comment %} コンテンツ大枠 {% endcomment %}
+    <div class="contents">
+      {% comment %} メニューリンク設定 {% endcomment %}
+      <div class="contents-menu bg-gradient">
+        <div class="contents-menu-icon">
+          <a href="{% url 'index' %}">
+            <img src="{% static 'icon/icon-home.png' %}" />
+          </a>
+        </div>
+        <div class="contents-menu-icon">
+          <a href="{% url 'index' %}">
+            <img src="{% static 'icon/icon-time.png' %}" />
+          </a>
+        </div>
+        <div class="contents-menu-icon">
+          <a href="{% url 'user_edit' %}">
+            <img src="{% static 'icon/icon-setting.png' %}" />
+          </a>
+        </div>
       </div>
-      <div class="menuicon">
-        <a href="{% url 'index' %}" data-text="お気に入り"><img src="{% static 'icon/icon-time.png' %}" /></a>
-      </div>
-      <div class="menuicon">
-        <a href="{% url 'user_edit' %}" data-text="お気に入り"><img src="{% static 'icon/icon-setting.png' %}" /></a>
+
+      {% comment %} 各画面のコンテンツ設定 {% endcomment %}
+      <div class="contents-main">
+        {% block contents %}{% endblock %}
       </div>
     </div>
-
-    {% comment %} 各画面のコンテンツ設定 {% endcomment %}
-    <div class="contents">{% block contents %}{% endblock %}</div>
 
     {% comment %} フッタ設定 {% endcomment %}
     <div class="footer">
