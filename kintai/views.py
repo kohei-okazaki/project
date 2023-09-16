@@ -49,21 +49,25 @@ class TopView(TemplateView):
             return render(request, "index.html")
         return render(request, "login/index.html")
 
+# ユーザ作成View
+class UserCreateView(TemplateView):
 
-# ユーザ作成
-def user_create(request):
-
-    if (request.method == "GET") :
-        params = {
+    def __init__(self):
+        self.params = {
             "form": UserCreateForm()
         }
-        return render(request, "user/create.html", params)
-    
-    obj = UserData()
-    user = UserCreateForm(request.POST, instance = obj)
-    user.save()
 
-    return redirect(to="login")
+    def get(self, request):
+        return render(request, "user/create.html", self.params)
+    
+    def post(self, request):
+
+        obj = UserData()
+        user = UserCreateForm(request.POST, instance = obj)
+        user.save()
+
+        return redirect(to="login")
+
 
 # ユーザ編集
 def user_edit(request):
