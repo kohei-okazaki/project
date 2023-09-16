@@ -1,20 +1,25 @@
 import logging
 from django.shortcuts import redirect, render
+from django.views.generic import TemplateView
 from .forms import LoginForm, UserCreateForm, UserEditForm
 from .models import UserData
 
 logger = logging.getLogger(__name__)
 
-# ログイン
-def login(request):
 
-    # セッション削除
-    request.session.flush()
-    params = {
-        "form": LoginForm()
-    }
+class LoginView(TemplateView):
 
-    return render(request, "login/index.html", params)
+    def __init__(self):
+        self.params = {
+            "form": LoginForm()
+        }
+
+    def get(self, request):
+
+        # セッション削除
+        request.session.flush()
+
+        return render(request, "login/index.html", self.params)
 
 # ログイン後のメニュー
 def index(request):
