@@ -41,16 +41,13 @@ class LoginView(TemplateView):
     
         return render(request, "login/index.html")
 
+# TOP画面View
+class TopView(TemplateView):
 
-# ログイン後のメニュー
-def index(request):
-
-    if ("seq_user_id" in request.session) :
-        # ログイン済の場合
-        logger.info(request.session["seq_user_id"])
-        return render(request, "index.html")
-
-    return render(request, "login/index.html")
+    def get(self, request):
+        if ("seq_user_id" in request.session) :
+            return render(request, "index.html")
+        return render(request, "login/index.html")
 
 
 # ユーザ作成
