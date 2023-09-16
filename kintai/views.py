@@ -30,10 +30,9 @@ def index(request):
     # USER_DATAを検索し、対象のユーザが登録されているか確認する
     seq_user_id = request.POST["seq_user_id"]
     password = request.POST["password"]
-    user = UserData.objects.filter(seq_user_id = seq_user_id, password = password)
-    logger.debug(user)
+    userList = UserData.objects.filter(seq_user_id = seq_user_id, password = password)
 
-    if (user is None):
+    if (userList.count()):
         params = {
             "errorMessage": "ユーザが存在しません"
         }
