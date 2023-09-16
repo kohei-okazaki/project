@@ -29,9 +29,11 @@ SECRET_KEY = "django-insecure-*wb*vqt7bg8wizzkay2&a1yxwci8t!b8_tw2_)dqqf5uj3dq^b
 # ・DEBUG = False
 # ・ALLOWED_HOSTS = ['127.0.0.1']
 # ・runserver --insecure で起動する
-DEBUG = False
+# DEBUG = False
+# ALLOWED_HOSTS = ['127.0.0.1']
 
-ALLOWED_HOSTS = ['127.0.0.1']
+DEBUG = True
+ALLOWED_HOSTS = []
 
 
 # Application definition

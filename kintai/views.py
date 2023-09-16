@@ -28,18 +28,18 @@ def index(request):
         return render(request, "login/index.html")
     
     # USER_DATAを検索し、対象のユーザが登録されているか確認する
-    seq_user_id = request.POST["seq_user_id"]
+    seqUserId = request.POST["seq_user_id"]
     password = request.POST["password"]
-    userList = UserData.objects.filter(seq_user_id = seq_user_id, password = password)
+    userList = UserData.objects.filter(seq_user_id = seqUserId, password = password)
 
-    if (userList.count()):
+    if (userList.count() < 1):
         params = {
             "errorMessage": "ユーザが存在しません"
         }
         return render(request, "login/index.html", params)
 
     # セッションにユーザIDを保持
-    request.session["seq_user_id"] = seq_user_id
+    request.session["seq_user_id"] = seqUserId
 
     return render(request, "index.html")
 
