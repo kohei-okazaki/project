@@ -5,7 +5,7 @@
   <div class="space-50"></div>
   <div class="login-frame">
     <div class="space-40"></div>
-    <form method="post" action="{% url 'index' %}">
+    <form method="post" action="{% url 'login' %}">
       {% csrf_token %}
       <div class="mb-3">
         <input id="seq_user_id" class="form-control bg-light placeholder" name="seq_user_id" placeholder="ユーザID" />

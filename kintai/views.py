@@ -7,6 +7,7 @@ from .models import UserData
 logger = logging.getLogger(__name__)
 
 
+# ログインView
 class LoginView(TemplateView):
 
     def __init__(self):
@@ -20,6 +21,26 @@ class LoginView(TemplateView):
         request.session.flush()
 
         return render(request, "login/index.html", self.params)
+    
+    def post(self, request):
+
+        loginForm = LoginForm(request.POST)
+        if (loginForm.is_valid()):
+
+            userList = UserData.objects.filter(seq_user_id = loginForm.cleaned_data["seq_user_id"], password = loginForm.cleaned_data["password"])
+            if (userList.count() < 1):
+                params = {
+                    "errorMessage": "ユーザが存在しません"
+                }
+                return render(request, "login/index.html", params)
+
+            # セッションにユーザIDを保持
+            request.session["seq_user_id"] = loginForm.cleaned_data["seq_user_id"]
+
+            return render(request, "index.html")
+    
+        return render(request, "login/index.html")
+
 
 # ログイン後のメニュー
 def index(request):
@@ -29,24 +50,6 @@ def index(request):
         logger.info(request.session["seq_user_id"])
         return render(request, "index.html")
 
-    if (request.method == "GET") :
-        return render(request, "login/index.html")
-
-    loginForm = LoginForm(request.POST)
-    if (loginForm.is_valid()):
-
-        userList = UserData.objects.filter(seq_user_id = loginForm.cleaned_data["seq_user_id"], password = loginForm.cleaned_data["password"])
-        if (userList.count() < 1):
-            params = {
-                "errorMessage": "ユーザが存在しません"
-            }
-            return render(request, "login/index.html", params)
-
-        # セッションにユーザIDを保持
-        request.session["seq_user_id"] = loginForm.cleaned_data["seq_user_id"]
-
-        return render(request, "index.html")
-    
     return render(request, "login/index.html")
 
 
