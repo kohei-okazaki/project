@@ -1,6 +1,6 @@
 import logging
 from django.shortcuts import redirect, render
-from django.views.generic import TemplateView, CreateView, UpdateView
+from django.views.generic import TemplateView, CreateView
 from .forms import LoginForm, UserCreateForm, UserEditForm
 from .models import UserData
 
