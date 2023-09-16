@@ -17,4 +17,4 @@ class UserCreateForm(forms.ModelForm):
 class UserEditForm(forms.ModelForm):
     class Meta:
         model = UserData
-        fields = ["password"]
+        fields = ["password", "company_cd", "division_cd"]

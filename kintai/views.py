@@ -1,6 +1,6 @@
 import logging
 from django.shortcuts import redirect, render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, CreateView, UpdateView
 from .forms import LoginForm, UserCreateForm, UserEditForm
 from .models import UserData
 
@@ -50,23 +50,10 @@ class TopView(TemplateView):
         return render(request, "login/index.html")
 
 # ユーザ作成View
-class UserCreateView(TemplateView):
-
-    def __init__(self):
-        self.params = {
-            "form": UserCreateForm()
-        }
-
-    def get(self, request):
-        return render(request, "user/create.html", self.params)
-    
-    def post(self, request):
-
-        obj = UserData()
-        user = UserCreateForm(request.POST, instance = obj)
-        user.save()
-
-        return redirect(to="login")
+class UserCreateView(CreateView):
+    template_name = "user/create.html"
+    form_class = UserCreateForm
+    success_url ="/kintai/login"
 
 # ユーザ編集View
 class UserEditView(TemplateView):
@@ -80,8 +67,7 @@ class UserEditView(TemplateView):
 
         sessionSeqUserId = request.session["seq_user_id"]
         currentUser = UserData.objects.get(seq_user_id=sessionSeqUserId)
-
-        self.params["form"] = UserEditForm(instance = currentUser)
+        self.params["form"] = currentUser
 
         return render(request, "user/edit.html", self.params)
 
