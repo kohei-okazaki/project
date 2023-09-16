@@ -63,7 +63,7 @@ def user_create(request):
 # ユーザ編集
 def user_edit(request):
 
-    sessionSeqUserId = request.session["seqUserId"]
+    sessionSeqUserId = request.session["seq_user_id"]
     currentUser = UserData.objects.get(seq_user_id=sessionSeqUserId)
 
     if (request.method == "GET") :
