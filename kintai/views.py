@@ -68,22 +68,30 @@ class UserCreateView(TemplateView):
 
         return redirect(to="login")
 
+# ユーザ編集View
+class UserEditView(TemplateView):
 
-# ユーザ編集
-def user_edit(request):
-
-    sessionSeqUserId = request.session["seq_user_id"]
-    currentUser = UserData.objects.get(seq_user_id=sessionSeqUserId)
-
-    if (request.method == "GET") :
-    
-        params = {
-            "form": UserEditForm(instance = currentUser),
+    def __init__(self):
+        self.params = {
+            "form": UserEditForm()
         }
 
-        return render(request, "user/edit.html", params)
+    def get(self, request):
+
+        sessionSeqUserId = request.session["seq_user_id"]
+        currentUser = UserData.objects.get(seq_user_id=sessionSeqUserId)
+
+        self.params["form"] = UserEditForm(instance = currentUser)
+
+        return render(request, "user/edit.html", self.params)
 
     
-    user = UserEditForm(request.POST, instance = currentUser)
-    user.save()
-    return redirect(to="user_edit")
+    def post(self, request):
+
+        sessionSeqUserId = request.session["seq_user_id"]
+        currentUser = UserData.objects.get(seq_user_id=sessionSeqUserId)
+
+        user = UserEditForm(request.POST, instance = currentUser)
+        user.save()
+
+        return redirect(to="user_edit")
