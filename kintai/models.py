@@ -7,6 +7,7 @@ class UserData(Model):
     password = models.CharField(db_column="PASSWORD", max_length=64, null=False, help_text='パスワード')
     company_cd = models.CharField(db_column="COMPANY_CD", max_length=5, null=False, help_text='企業コード')
     division_cd = models.CharField(db_column="DIVISION_CD", default="", max_length=5, null=False, help_text='部署コード')
+    del_flg = models.BooleanField(db_column="DEL_FLG", default=False, max_length=5, null=False, help_text='削除フラグ')
     reg_date = models.DateTimeField(db_column="REG_DATE", auto_now_add=True, null=False, help_text='登録日時')
     update_date = models.DateTimeField(db_column="UPDATE_DATE", auto_now=True, null=False, help_text='更新日時')
 
@@ -16,6 +17,7 @@ class UserData(Model):
             ",PASSWORD=" + str(self.password) + \
             ",COMPANY_CD=" + str(self.company_cd) + \
             ",DIVISION_CD=" + str(self.division_cd) + \
+            ",DEL_FLG=" + str(self.del_flg) + \
             ",REG_DATE=" + self.reg_date.strftime('%Y/%m/%d %H:%M:%S') + \
             ",UPDATE_DATE=" + self.update_date.strftime('%Y/%m/%d %H:%M:%S')
 
@@ -60,6 +62,7 @@ class OntimeMt(Model):
     start_minute = models.CharField(db_column="START_MINUTE", max_length=4, null=False, help_text='始業時間(分)')
     end_hour = models.CharField(db_column="END_HOUR", max_length=4, null=False, help_text='終業時間(時)')
     end_minute = models.CharField(db_column="END_MINUTE", max_length=4, null=False, help_text='終業時間(分)')
+    del_flg = models.BooleanField(db_column="DEL_FLG", default=False, max_length=5, null=False, help_text='削除フラグ')
     reg_date = models.DateTimeField(db_column="REG_DATE", auto_now_add=True, null=False, help_text='登録日時')
     update_date = models.DateTimeField(db_column="UPDATE_DATE", auto_now=True, null=False, help_text='更新日時')
 
@@ -72,6 +75,7 @@ class OntimeMt(Model):
             ",START_MINUTE=" + str(self.start_minute) + \
             ",END_HOUR=" + str(self.end_hour) + \
             ",END_MINUTE=" + str(self.end_minute) + \
+            ",DEL_FLG=" + str(self.del_flg) + \
             ",REG_DATE=" + self.reg_date.strftime('%Y/%m/%d %H:%M:%S') + \
             ",UPDATE_DATE=" + self.update_date.strftime('%Y/%m/%d %H:%M:%S')
 
@@ -86,6 +90,7 @@ class OntimeMt(Model):
 class CompanyMt(Model):
     company_cd = models.CharField(db_column="COMPANY_CD", primary_key=True, max_length=5, null=False, help_text='企業コード')
     name = models.CharField(db_column="NAME", max_length=64, null=True, help_text='企業名')
+    del_flg = models.BooleanField(db_column="DEL_FLG", default=False, max_length=5, null=False, help_text='削除フラグ')
     reg_date = models.DateTimeField(db_column="REG_DATE", auto_now_add=True, null=False, help_text='登録日時')
     update_date = models.DateTimeField(db_column="UPDATE_DATE", auto_now=True, null=False, help_text='更新日時')
 
@@ -93,6 +98,7 @@ class CompanyMt(Model):
         return "COMPANY_MT=>"\
             "COMPANY_CD=" + str(self.company_cd) + \
             ",NAME=" + str(self.name) + \
+            ",DEL_FLG=" + str(self.del_flg) + \
             ",REG_DATE=" + self.reg_date.strftime('%Y/%m/%d %H:%M:%S') + \
             ",UPDATE_DATE=" + self.update_date.strftime('%Y/%m/%d %H:%M:%S')
 
@@ -103,6 +109,7 @@ class CompanyMt(Model):
 class DivisionMt(Model):
     division_cd = models.CharField(db_column="DIVISION_CD", primary_key=True, max_length=5, null=False, help_text='部署コード')
     name = models.CharField(db_column="NAME", max_length=64, null=True, help_text='部署名')
+    del_flg = models.BooleanField(db_column="DEL_FLG", default=False, max_length=5, null=False, help_text='削除フラグ')
     reg_date = models.DateTimeField(db_column="REG_DATE", auto_now_add=True, null=False, help_text='登録日時')
     update_date = models.DateTimeField(db_column="UPDATE_DATE", auto_now=True, null=False, help_text='更新日時')
 
@@ -110,6 +117,7 @@ class DivisionMt(Model):
         return "DIVISION_MT=>"\
             "DIVISION_CD=" + str(self.division_cd) + \
             ",NAME=" + str(self.name) + \
+            ",DEL_FLG=" + str(self.del_flg) + \
             ",REG_DATE=" + self.reg_date.strftime('%Y/%m/%d %H:%M:%S') + \
             ",UPDATE_DATE=" + self.update_date.strftime('%Y/%m/%d %H:%M:%S')
 

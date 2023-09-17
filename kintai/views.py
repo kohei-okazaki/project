@@ -82,6 +82,7 @@ class UserEditView(TemplateView):
 
         return redirect(to="user_edit")
 
+# 日次勤怠登録View
 class DailyworkCreateView(TemplateView):
 
     def __init__(self):
