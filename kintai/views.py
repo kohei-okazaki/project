@@ -62,22 +62,31 @@ class UserEditView(TemplateView):
         self.params = {
             "form": UserEditForm()
         }
+    
+    def getUserData(self, seq_user_id):
+        return UserData.objects.get(seq_user_id=seq_user_id)
 
     def get(self, request):
 
-        sessionSeqUserId = request.session["seq_user_id"]
-        currentUser = UserData.objects.get(seq_user_id=sessionSeqUserId)
+        currentUser = self.getUserData(request.session["seq_user_id"])
         self.params["form"] = currentUser
 
         return render(request, "user/edit.html", self.params)
 
-    
     def post(self, request):
 
-        sessionSeqUserId = request.session["seq_user_id"]
-        currentUser = UserData.objects.get(seq_user_id=sessionSeqUserId)
+        currentUser = self.getUserData(request.session["seq_user_id"])
 
         user = UserEditForm(request.POST, instance = currentUser)
         user.save()
 
         return redirect(to="user_edit")
+
+class DailyworkCreateView(TemplateView):
+
+    def __init__(self):
+        self.params = {
+        }
+
+    def get(self, request):
+        return render(request, "dailywork/create.html", self.params)
