@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 {% block title %}ユーザ編集{% endblock %} 
 {% block contents %}
-<div class="container">
+<div class="container border p-5">
   <div class="row">
     <div class="col-12">
-      <h2>ユーザ編集</h2>
+      <h3 class="text-center">ユーザ編集</h3>
     </div>
   </div>
 
@@ -12,45 +12,34 @@
     <div class="col-12">
       <form action="{% url 'user_edit' %}" method="post">
         {% csrf_token %}
-        <div class="row">
-          <div class="col-3">
-            <label for="seqUserId" class="form-label">ユーザID</label>
-          </div>
-          <div class="col-9">{{ request.session.seq_user_id }}</div>
-        </div>
-
-        <div class="row">
-          <div class="col-3">
-            <label for="password" class="form-label">パスワード</label>
-          </div>
-          <div class="col-9">
-            <input class="form-control bg-light placeholder" type="password" name="password">
+        <div class="row mb-3">
+          <label for="seqUserId" class="col-sm-2 col-form-label bold">ユーザID</label>
+          <div class="col-sm-8">
+            <input type="text" readonly class="form-control-plaintext" value={{ request.session.seq_user_id }}>
           </div>
         </div>
-
-        <div class="row">
-          <div class="col-3">
-            <label for="companyCd" class="form-label">企業コード</label>
-          </div>
-          <div class="col-9">
-            <input class="form-control bg-light placeholder" type="text" name="company_cd" value={{ form.company_cd }}>
+        <div class="row mb-3">
+          <label for="password" class="col-sm-2 col-form-label bold">パスワード</label>
+          <div class="col-sm-8">
+            <input class="form-control bg-light" type="password" name="password">
           </div>
         </div>
-
-        <div class="row">
-          <div class="col-3">
-            <label for="divisionCd" class="form-label">部署コード</label>
-          </div>
-          <div class="col-9">
-            <input class="form-control bg-light placeholder" type="text" name="division_cd" value={{ form.division_cd }}>
+        <div class="row mb-3">
+          <label for="company_cd" class="col-sm-2 col-form-label bold">企業コード</label>
+          <div class="col-sm-8">
+            <input type="text" readonly class="form-control-plaintext" value={{ form.company_cd }}>
           </div>
         </div>
-
-        <div class="row">
-          <div class="col-3">
+        <div class="row mb-3">
+          <label for="division_cd" class="col-sm-2 col-form-label bold">部署コード</label>
+          <div class="col-sm-8">
+            <input type="text" readonly class="form-control-plaintext" value={{ form.division_cd }}>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-10">
             <input type="submit" class="btn btn-primary bold" value="編集"></input>
           </div>
-          <div class="col-9"></div>
         </div>
 
       </form>
