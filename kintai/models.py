@@ -135,10 +135,10 @@ class BusinessCalendarMt(Model):
 
     def __str__(self):
         return "BUSINESS_CALENDAR_MT=>"\
-            "SEQ_BUSINESS_CALENDAR_MT_ID=" + str(self.division_cd) + \
-            ",DATE=" + str(self.name) + \
-            ",WEEKDAY=" + str(self.del_flg) + \
-            ",BUSINESS_FLG=" + str(self.del_flg) + \
+            "SEQ_BUSINESS_CALENDAR_MT_ID=" + str(self.seq_business_calendar_mt_id) + \
+            ",DATE=" + str(self.date) + \
+            ",WEEKDAY=" + str(self.weekday) + \
+            ",BUSINESS_FLG=" + str(self.business_flg) + \
             ",REG_DATE=" + self.reg_date.strftime('%Y/%m/%d %H:%M:%S') + \
             ",UPDATE_DATE=" + self.update_date.strftime('%Y/%m/%d %H:%M:%S')
 

@@ -2,7 +2,8 @@ import logging
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView, CreateView
 from .forms import LoginForm, UserCreateForm, UserEditForm
-from .models import UserData
+from .models import UserData, BusinessCalendarMt
+from .contents.util import date_util
 
 logger = logging.getLogger(__name__)
 
@@ -87,7 +88,22 @@ class DailyworkCreateView(TemplateView):
 
     def __init__(self):
         self.params = {
+            "businessCalendarMtList": []
         }
 
     def get(self, request):
+
+        # 対象年月を取得
+        yyyymm = None
+        if "yyyymm" in request.GET:
+            yyyymm = request.GET["yyyymm"]
+
+        yyyymm = date_util.getStrYYYYMM(yyyymm)
+        fromDate = date_util.getFirstDateForStr(yyyymm)
+        toDate = date_util.getLastDateForStr(yyyymm)
+
+        # 対象年月の営業日マスタを取得
+        businessCalendarMtList = BusinessCalendarMt.objects.filter(date__range=[fromDate, toDate])
+        self.params["businessCalendarMtList"] = businessCalendarMtList
+
         return render(request, "dailywork/create.html", self.params)
