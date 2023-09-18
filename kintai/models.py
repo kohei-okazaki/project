@@ -123,3 +123,24 @@ class DivisionMt(Model):
 
     class Meta:
         db_table = "DIVISION_MT"
+
+
+class BusinessCalendarMt(Model):
+    seq_business_calendar_mt_id = models.BigAutoField(db_column="SEQ_BUSINESS_CALENDAR_MT_ID", primary_key=True, null=False, help_text='営業日マスタID')
+    date = models.DateField(db_column="DATE", null=False, help_text='日付')
+    weekday = models.CharField(db_column="WEEKDAY", max_length=1, null=False, help_text='曜日')
+    business_flg = models.BooleanField(db_column="BUSINESS_FLG", default=True, null=False, help_text='営業日フラグ')
+    reg_date = models.DateTimeField(db_column="REG_DATE", auto_now_add=True, null=False, help_text='登録日時')
+    update_date = models.DateTimeField(db_column="UPDATE_DATE", auto_now=True, null=False, help_text='更新日時')
+
+    def __str__(self):
+        return "BUSINESS_CALENDAR_MT=>"\
+            "SEQ_BUSINESS_CALENDAR_MT_ID=" + str(self.division_cd) + \
+            ",DATE=" + str(self.name) + \
+            ",WEEKDAY=" + str(self.del_flg) + \
+            ",BUSINESS_FLG=" + str(self.del_flg) + \
+            ",REG_DATE=" + self.reg_date.strftime('%Y/%m/%d %H:%M:%S') + \
+            ",UPDATE_DATE=" + self.update_date.strftime('%Y/%m/%d %H:%M:%S')
+
+    class Meta:
+        db_table = "BUSINESS_CALENDAR_MT"
