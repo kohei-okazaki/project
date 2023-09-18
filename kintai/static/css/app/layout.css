@@ -60,6 +60,28 @@ div.contents-menu-icon {
     padding: 11px;
 }
 
+/* layout:サブメニューの設定 */
+div.contents-submenu {
+    height: 100%;
+    background-color: #c596e4;
+}
+
+a.contents-submenu-category {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+div.contents-submenu-category-on {
+    display: flex;
+    flex-flow: column;
+    padding: 18px;
+    width: 120px;
+}
+
+div.contents-submenu-category-off {
+    display: none;
+}
+
 div.contents-main {
     padding-top: 20px;
     flex-grow: 1;

@@ -41,20 +41,31 @@
       {% if request.session.seq_user_id %}
       {% comment %} メニューリンク設定 {% endcomment %}
       <div class="contents-menu bg-gradient">
-        <div class="contents-menu-icon">
+        <div id="top-category" class="contents-menu-icon">
           <a href="{% url 'index' %}">
             <img src="{% static 'icon/icon-home.png' %}" />
           </a>
         </div>
-        <div class="contents-menu-icon">
-          <a href="{% url 'index' %}">
+        <div id="work-category" class="contents-menu-icon">
+          <a href="#">
             <img src="{% static 'icon/icon-time.png' %}" />
           </a>
         </div>
-        <div class="contents-menu-icon">
-          <a href="{% url 'user_edit' %}">
+        <div id="user-category" class="contents-menu-icon">
+          <a href="#">
             <img src="{% static 'icon/icon-setting.png' %}" />
           </a>
+        </div>
+      </div>
+
+      {% comment %} サブメニューリンク設定 {% endcomment %}
+      <div class="contents-submenu">
+        <div id="work-category-submenu" class="contents-submenu-category-off">
+          <a href="{% url 'dailywork_create' %}" class="hide-anker white contents-submenu-category">勤怠登録</a>
+          <a href="#" class="hide-anker white contents-submenu-category">勤怠照会</a>
+        </div>
+        <div id="user-category-submenu" class="contents-submenu-category-off">
+          <a href="{% url 'user_edit' %}" class="hide-anker white contents-submenu-category">ユーザ設定</a>
         </div>
       </div>
       {% endif %}
@@ -71,6 +82,9 @@
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
     <script>
+      /**
+       * ヘッダーを固定する
+       */
       function fixedAnime() {
         var headerH = $("#header").outerHeight(true);
         var scroll = $(window).scrollTop();
@@ -84,14 +98,67 @@
       }
 
       // 画面をスクロールをしたら動かしたい場合
-      $(window).scroll(function () {
+      $(window).scroll(function() {
         fixedAnime();
       });
 
       // ページが読み込まれたらすぐに動かしたい場合
-      $(window).on('load', function () {
+      $(window).on("load", function() {
         fixedAnime();
       });
+
+      /**
+       * 勤怠カテゴリサブメニューの表示制御
+       */
+      function controllWorkSubmenu(isDisp) {
+        if (isDisp) {
+          $("#work-category-submenu").removeClass("contents-submenu-category-off");
+          $("#work-category-submenu").addClass("contents-submenu-category-on");
+        } else {
+          $("#work-category-submenu").removeClass("contents-submenu-category-on");
+          $("#work-category-submenu").addClass("contents-submenu-category-off");
+        }
+      }
+
+      /**
+       * ユーザカテゴリサブメニューの表示制御
+       */
+      function controllUserSubmenu(isDisp) {
+        if (isDisp) {
+          $("#user-category-submenu").removeClass("contents-submenu-category-off");
+          $("#user-category-submenu").addClass("contents-submenu-category-on");
+        } else {
+          $("#user-category-submenu").removeClass("contents-submenu-category-on");
+          $("#user-category-submenu").addClass("contents-submenu-category-off");
+        }
+      }
+
+      $("#top-category").hover(function() {
+        // TOP画面カテゴリ画像にマウスホバー時、すべてのサブメニューを非表示にする
+        controllWorkSubmenu(false);
+        controllUserSubmenu(false);
+      });
+
+      $("#work-category").hover(function() {
+        // 勤怠カテゴリ画像にマウスホバー
+        controllWorkSubmenu(true);
+        controllUserSubmenu(false);
+      });
+
+      $("#user-category").hover(function() {
+        // ユーザカテゴリ画像にマウスホバー
+        controllWorkSubmenu(false);
+        controllUserSubmenu(true);
+      });
+
+      $(".contents-submenu").hover(function() {
+      }, function() {
+        // submenuからマウスが外れた場合、すべてのサブメニューを非表示にする
+        controllWorkSubmenu(false);
+        controllUserSubmenu(false);
+      });
+
+
     </script>
   </body>
 </html>
