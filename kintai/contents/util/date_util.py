@@ -7,9 +7,9 @@ from dateutil.relativedelta import relativedelta
 logger = logging.getLogger(__name__)
 
 # date format
-format_YYYYMM = "%Y%m"
-format_YYYYMMDD = "%Y%m%d"
-format_HHMISS_SEP = "%H:%M:%S"
+FORMAT_YYYYMM = "%Y%m"
+FORMAT_YYYYMMDD = "%Y%m%d"
+FORMAT_HHMISS_SEP = "%H:%M:%S"
 
 
 def get_sysdate() -> datetime:
@@ -46,7 +46,7 @@ def get_str_yyyymm(str: str) -> str:
     '''
     if (str is None):
         logger.warn("引数が未指定. str=None")
-        return to_str(datetime.datetime.now().date(), format_YYYYMM)
+        return to_str(datetime.datetime.now().date(), FORMAT_YYYYMM)
     return str
 
 
@@ -61,7 +61,7 @@ def get_first_date_str(str: str) -> datetime:
     '''
     yyyymm形式の年月の月初のdatetimeを返す
     '''
-    return to_date(str + "01", format_YYYYMMDD)
+    return to_date(str + "01", FORMAT_YYYYMMDD)
 
 
 def getFirstDate(dt: datetime) -> datetime:
@@ -75,7 +75,7 @@ def get_last_date_str(str: str) -> datetime:
     '''
     yyyymm形式の年月の月末のdatetimeを返す
     '''
-    dt: datetime = to_date(str + "01", format_YYYYMMDD)
+    dt: datetime = to_date(str + "01", FORMAT_YYYYMMDD)
     return get_last_date(dt)
 
 

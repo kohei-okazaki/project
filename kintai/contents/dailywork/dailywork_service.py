@@ -16,9 +16,9 @@ def get_actual_work_date(start_hh: str, start_mi: str, end_hh: str, end_mi: str)
     実労働時間を取得
     '''
     start: datetime = date_util.to_date(
-        start_hh + ":" + start_mi + ":00", date_util.format_HHMISS_SEP)
+        start_hh + ":" + start_mi + ":00", date_util.FORMAT_HHMISS_SEP)
     end: datetime = date_util.to_date(end_hh + ":" + end_mi + ":00",
-                            date_util.format_HHMISS_SEP)
+                            date_util.FORMAT_HHMISS_SEP)
     return (end - start).seconds / 60 / 60
 
 

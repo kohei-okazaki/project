@@ -116,11 +116,11 @@ class DailyworkCreateView(TemplateView):
 
         sysdate: datetime = date_util.get_sysdate()
         self.params["yyyymm_list"].append(
-            date_util.to_str(sysdate, date_util.format_YYYYMM))
+            date_util.to_str(sysdate, date_util.FORMAT_YYYYMM))
         self.params["yyyymm_list"].append(date_util.to_str(
-            date_util.get_any_month(sysdate, -1), date_util.format_YYYYMM))
+            date_util.get_any_month(sysdate, -1), date_util.FORMAT_YYYYMM))
         self.params["yyyymm_list"].append(date_util.to_str(
-            date_util.get_any_month(sysdate, -2), date_util.format_YYYYMM))
+            date_util.get_any_month(sysdate, -2), date_util.FORMAT_YYYYMM))
 
         # 対象年月を取得
         yyyymm: str = None
@@ -142,9 +142,7 @@ class DailyworkCreateView(TemplateView):
 
         current_user: UserData = user_service.get_user(
             seq_user_id=request.session["seq_user_id"])
-        dailywork_service.regist_daily_user_work_data(user=current_user,
-                                                      year=request.POST["year"], month=request.POST["month"], day=request.POST["day"],
-                                                      start_hh=request.POST["start_hh"], start_mi=request.POST["start_mi"],
-                                                      end_hh=request.POST["end_hh"], end_mi=request.POST["end_mi"])
+        dailywork_service.regist_daily_user_work_data(user=current_user, year=request.POST["year"], month=request.POST["month"], day=request.POST[
+                                                      "day"], start_hh=request.POST["start_hh"], start_mi=request.POST["start_mi"], end_hh=request.POST["end_hh"], end_mi=request.POST["end_mi"])
 
         return redirect(to="dailywork_create")
