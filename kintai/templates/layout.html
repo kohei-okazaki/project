@@ -81,11 +81,12 @@
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/app/dailywork.js' %}"></script>
     <script>
       /**
        * ヘッダーを固定する
        */
-      function fixedAnime() {
+      function fixedHeader() {
         var headerH = $("#header").outerHeight(true);
         var scroll = $(window).scrollTop();
         if (scroll >= headerH) {
@@ -99,12 +100,12 @@
 
       // 画面をスクロールをしたら動かしたい場合
       $(window).scroll(function() {
-        fixedAnime();
+        fixedHeader();
       });
 
       // ページが読み込まれたらすぐに動かしたい場合
       $(window).on("load", function() {
-        fixedAnime();
+        fixedHeader();
       });
 
       /**

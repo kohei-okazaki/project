@@ -179,3 +179,13 @@ div.footer {
     margin: 5px;
     font-size: 14px;
 }
+
+/* dailywork:時刻の入力幅設定 */
+.dailywork-time-input {
+    width: 80px;
+}
+
+/* dailywork:プルダウンの横並び設定 */
+.dailywork-yyyymm-area {
+    display: flex;
+}

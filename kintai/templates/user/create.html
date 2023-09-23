@@ -4,7 +4,7 @@
 <div class="container">
   <div class="space-50"></div>
   <div class="login-frame">
-  <form method="post" action=" {% url 'user_create' %}">
+  <form method="post" action="{% url 'user_create' %}">
     {% csrf_token %}
     <div class="mb-3">
       <input id="password" class="form-control bg-light placeholder" name="password" placeholder="パスワード" />

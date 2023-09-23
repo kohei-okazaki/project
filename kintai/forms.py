@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserData
+from .models import DailyUserWorkData, UserData
 
 
 # ログインForm
@@ -21,3 +21,9 @@ class UserEditForm(forms.ModelForm):
     class Meta:
         model = UserData
         fields = ["password", "company_cd", "division_cd"]
+
+# 日次勤怠登録Form
+class DailyworkCreateForm(forms.ModelForm):
+    class Meta:
+        model = DailyUserWorkData
+        fields = ["seq_user_id", "company_cd", "division_cd", "work_start_date", "work_end_date", "actual_work_date"]
