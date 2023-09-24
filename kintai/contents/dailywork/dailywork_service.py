@@ -37,15 +37,29 @@ def regist_daily_user_work_data(user: UserData, year: str, month: str, day: str,
     actual_work_date: decimal = get_actual_work_date(
         start_hh, start_mi, end_hh, end_mi)
 
-    work_data: DailyUserWorkData = DailyUserWorkData(
-        seq_user_id=seq_user_id,
-        company_cd=company_cd,
-        division_cd=division_cd,
-        work_start_date=work_start_date,
-        work_end_date=work_end_date,
-        actual_work_date=actual_work_date)
+    # 日別ユーザ勤怠情報を検索
+    from_date: datetime = datetime.datetime(int(year), int(month), int(day))
+    to_date: datetime = datetime.datetime(int(year), int(month), int(day) + 1)
+    daily_user_work_data_list = DailyUserWorkData.objects.filter(
+        seq_user_id=user.seq_user_id, work_start_date__range=[from_date, to_date]).order_by("work_start_date")
 
-    work_data.save()
+    if (daily_user_work_data_list.count() > 0):
+        # 既に勤怠情報が登録されている場合
+        work_data: DailyUserWorkData = daily_user_work_data_list.first()
+        work_data.work_start_date = work_start_date
+        work_data.work_end_date = work_end_date
+        work_data.save()
+
+    else:
+        work_data: DailyUserWorkData = DailyUserWorkData(
+            seq_user_id=seq_user_id,
+            company_cd=company_cd,
+            division_cd=division_cd,
+            work_start_date=work_start_date,
+            work_end_date=work_end_date,
+            actual_work_date=actual_work_date)
+
+        work_data.save()
 
     return True
 

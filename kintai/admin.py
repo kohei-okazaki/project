@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BusinessCalendarMt, UserData, DailyUserWorkData, CompanyMt, DivisionMt, OntimeMt
+from kintai.models import BusinessCalendarMt, UserData, DailyUserWorkData, CompanyMt, DivisionMt, OntimeMt
 
 # Register your models here.
 admin.site.register(UserData)

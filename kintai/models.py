@@ -34,6 +34,8 @@ class DailyUserWorkData(Model):
     work_start_date = models.DateTimeField(db_column="WORK_START_DATE", null=False, help_text='始業時刻')
     work_end_date = models.DateTimeField(db_column="WORK_END_DATE", null=False, help_text='終業時刻')
     actual_work_date = models.CharField(db_column="ACTUAL_WORK_TIME", max_length=4, null=False, help_text='実労働時間')
+    approval_flg = models.BooleanField(db_column="APPROVAL_FLG", default=False, null=False, help_text='承認フラグ')
+    cancel_flg = models.BooleanField(db_column="CANCEL_FLG", default=False, null=False, help_text='取消申請フラグ')
     reg_date = models.DateTimeField(db_column="REG_DATE", auto_now_add=True, null=False, help_text='登録日時')
     update_date = models.DateTimeField(db_column="UPDATE_DATE", auto_now=True, null=False, help_text='更新日時')
 
@@ -47,6 +49,8 @@ class DailyUserWorkData(Model):
             ",WORK_START_DATE=" + str(self.work_start_date) + \
             ",WORK_END_DATE=" + str(self.work_end_date) + \
             ",ACTUAL_WORK_TIME=" + str(self.actual_work_date) + \
+            ",APPROVAL_FLG=" + str(self.approval_flg) + \
+            ",CANCEL_FLG=" + str(self.cancel_flg) + \
             ",REG_DATE=" + self.reg_date.strftime('%Y/%m/%d %H:%M:%S') + \
             ",UPDATE_DATE=" + self.update_date.strftime('%Y/%m/%d %H:%M:%S')
 
@@ -62,7 +66,7 @@ class OntimeMt(Model):
     start_minute = models.CharField(db_column="START_MINUTE", max_length=4, null=False, help_text='始業時間(分)')
     end_hour = models.CharField(db_column="END_HOUR", max_length=4, null=False, help_text='終業時間(時)')
     end_minute = models.CharField(db_column="END_MINUTE", max_length=4, null=False, help_text='終業時間(分)')
-    del_flg = models.BooleanField(db_column="DEL_FLG", default=False, max_length=5, null=False, help_text='削除フラグ')
+    del_flg = models.BooleanField(db_column="DEL_FLG", default=False, null=False, help_text='削除フラグ')
     reg_date = models.DateTimeField(db_column="REG_DATE", auto_now_add=True, null=False, help_text='登録日時')
     update_date = models.DateTimeField(db_column="UPDATE_DATE", auto_now=True, null=False, help_text='更新日時')
 
@@ -90,7 +94,7 @@ class OntimeMt(Model):
 class CompanyMt(Model):
     company_cd = models.CharField(db_column="COMPANY_CD", primary_key=True, max_length=5, null=False, help_text='企業コード')
     name = models.CharField(db_column="NAME", max_length=64, null=True, help_text='企業名')
-    del_flg = models.BooleanField(db_column="DEL_FLG", default=False, max_length=5, null=False, help_text='削除フラグ')
+    del_flg = models.BooleanField(db_column="DEL_FLG", default=False, null=False, help_text='削除フラグ')
     reg_date = models.DateTimeField(db_column="REG_DATE", auto_now_add=True, null=False, help_text='登録日時')
     update_date = models.DateTimeField(db_column="UPDATE_DATE", auto_now=True, null=False, help_text='更新日時')
 
@@ -109,7 +113,7 @@ class CompanyMt(Model):
 class DivisionMt(Model):
     division_cd = models.CharField(db_column="DIVISION_CD", primary_key=True, max_length=5, null=False, help_text='部署コード')
     name = models.CharField(db_column="NAME", max_length=64, null=True, help_text='部署名')
-    del_flg = models.BooleanField(db_column="DEL_FLG", default=False, max_length=5, null=False, help_text='削除フラグ')
+    del_flg = models.BooleanField(db_column="DEL_FLG", default=False, null=False, help_text='削除フラグ')
     reg_date = models.DateTimeField(db_column="REG_DATE", auto_now_add=True, null=False, help_text='登録日時')
     update_date = models.DateTimeField(db_column="UPDATE_DATE", auto_now=True, null=False, help_text='更新日時')
 
