@@ -1,5 +1,5 @@
 from django import forms
-from .models import DailyUserWorkData, UserData
+from kintai.models import DailyUserWorkData, UserData
 
 
 class LoginForm(forms.Form):

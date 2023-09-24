@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import DailyworkCreateView, LoginView, TopView, UserCreateView, UserEditView
+from kintai.views import DailyworkCreateView, LoginView, TopView, UserCreateView, UserEditView
 
 urlpatterns = [
     path("login/", LoginView.as_view(), name="login"),
