@@ -22,6 +22,7 @@ $(window).on('load', function () {
             }
         });
         $("div.contents-menu").css("height", "260%");
+        $("div.contents-submenu").css("height", "260%");
     }
 
 });

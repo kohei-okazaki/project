@@ -107,7 +107,7 @@ class DailyworkCreateView(TemplateView):
 
     def __init__(self):
         self.params = {
-            "business_calendar_mt_list": [],
+            "dto_list": [],
             "yyyymm_list": [],
             "current_month": ""
         }
@@ -128,21 +128,20 @@ class DailyworkCreateView(TemplateView):
             yyyymm = request.GET["yyyymm"]
 
         yyyymm: str = date_util.get_str_yyyymm(yyyymm)
-        self.params["current_month"] = yyyymm
-        from_date: datetime = date_util.get_first_date_str(yyyymm)
-        to_date: datetime = date_util.get_last_date_str(yyyymm)
+        user: UserData = user_service.get_user(
+            seq_user_id=request.session["seq_user_id"])
 
-        # 対象年月の営業日マスタを取得
-        self.params["business_calendar_mt_list"] = dailywork_service.get_business_calendar_mt_list(
-            from_date, to_date)
+        self.params["current_month"] = yyyymm
+        self.params["dto_list"] = dailywork_service.get_daily_user_work_dto_list(
+            user=user, yyyymm=yyyymm)
 
         return render(request, "dailywork/create.html", self.params)
 
     def post(self, request: HttpRequest) -> HttpResponse:
 
-        current_user: UserData = user_service.get_user(
+        user: UserData = user_service.get_user(
             seq_user_id=request.session["seq_user_id"])
-        dailywork_service.regist_daily_user_work_data(user=current_user, year=request.POST["year"], month=request.POST["month"], day=request.POST[
+        dailywork_service.regist_daily_user_work_data(user=user, year=request.POST["year"], month=request.POST["month"], day=request.POST[
                                                       "day"], start_hh=request.POST["start_hh"], start_mi=request.POST["start_mi"], end_hh=request.POST["end_hh"], end_mi=request.POST["end_mi"])
 
         return redirect(to="dailywork_create")

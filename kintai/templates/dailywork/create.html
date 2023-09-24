@@ -55,7 +55,7 @@
           </tr>
         </thead>
         <tbody>
-          {% for mt in business_calendar_mt_list %}
+          {% for dto in dto_list %}
           <form method="post" action="{% url 'dailywork_create' %}">
             {% csrf_token %}
             <tr>
@@ -65,26 +65,27 @@
                 </div>
               </td>
               <td>
-                <div class="d-flex align-items-center justify-content-center">{{ mt.date|date:"m/d" }}</div>
-                <input type="hidden" name="year" value={{ mt.date|date:"Y" }} />
-                <input type="hidden" name="month" value={{ mt.date|date:"n" }} />
-                <input type="hidden" name="day" value={{ mt.date|date:"j" }} />
+                <div class="d-flex align-items-center justify-content-center">{{ dto.date|date:"m/d" }}</div>
+                <input type="hidden" name="year" value={{ dto.date|date:"Y" }} />
+                <input type="hidden" name="month" value={{ dto.date|date:"n" }} />
+                <input type="hidden" name="day" value={{ dto.date|date:"j" }} />
               </td>
               <td>
-                {% if mt.business_flg == 0 %}
-                    {% if mt.weekday == "月" or mt.weekday == "火" or mt.weekday == "水" or mt.weekday == "木" or mt.weekday == "金" %}
-                      {% comment %} 祝日の場合 {% endcomment %}
-                      <div class="weekday d-flex align-items-center justify-content-center">祝</div>
-                    {% else %}
-                      <div class="weekday d-flex align-items-center justify-content-center">{{ mt.weekday }}</div>
-                    {% endif %}
+                {% if dto.business_flg == 0 %}
+                  {% if dto.weekday == "月" or dto.weekday == "火" or dto.weekday == "水" or dto.weekday == "木" or dto.weekday == "金" %}
+                    {% comment %} 祝日の場合 {% endcomment %}
+                    <div class="weekday d-flex align-items-center justify-content-center">祝</div>
+                  {% else %}
+                    <div class="weekday d-flex align-items-center justify-content-center">{{ dto.weekday }}</div>
+                  {% endif %}
                 {% else %}
-                  <div class="weekday d-flex align-items-center justify-content-center">{{ mt.weekday }}</div>
+                  <div class="weekday d-flex align-items-center justify-content-center">{{ dto.weekday }}</div>
                 {% endif %}
               </td>
               <td>
                 <div class="d-flex align-items-center justify-content-center">
                   <select class="form-select dailywork-time-input" name="start_hh">
+                    <option selected>{{ dto.work_start_date|date:"G" }}</option>
                     <option>0</option>
                     <option>1</option>
                     <option>2</option>
@@ -117,6 +118,7 @@
               <td>
                 <div class="d-flex align-items-center justify-content-center">
                   <select class="form-select dailywork-time-input" name="start_mi">
+                    <option selected>{{ dto.work_start_date|date:"i" }}</option>
                     <option>00</option>
                     <option>15</option>
                     <option>30</option>
@@ -130,6 +132,7 @@
               <td>
                 <div class="d-flex align-items-center justify-content-center">
                   <select class="form-select dailywork-time-input" name="end_hh">
+                    <option selected>{{ dto.work_end_date|date:"G" }}</option>
                     <option>0</option>
                     <option>1</option>
                     <option>2</option>
@@ -163,6 +166,7 @@
               <td>
                 <div class="d-flex align-items-center justify-content-center">
                   <select class="form-select dailywork-time-input" name="end_mi">
+                    <option selected>{{ dto.work_end_date|date:"i" }}</option>
                     <option>00</option>
                     <option>15</option>
                     <option>30</option>
