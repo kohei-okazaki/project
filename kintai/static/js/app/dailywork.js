@@ -9,7 +9,7 @@ $(window).on('load', function () {
                     "color": "#0000ff"
                 });
 
-            } else if ($(val).text() === "日") {
+            } else if ($(val).text() === "日" || $(val).text() === "祝") {
                 // 日曜日の場合
                 $(val).addClass("sunday");
                 $(".sunday").css({

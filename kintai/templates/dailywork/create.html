@@ -71,7 +71,16 @@
                 <input type="hidden" name="day" value={{ mt.date|date:"j" }} />
               </td>
               <td>
-                <div class="weekday d-flex align-items-center justify-content-center">{{ mt.weekday }}</div>
+                {% if mt.business_flg == 0 %}
+                    {% if mt.weekday == "月" or mt.weekday == "火" or mt.weekday == "水" or mt.weekday == "木" or mt.weekday == "金" %}
+                      {% comment %} 祝日の場合 {% endcomment %}
+                      <div class="weekday d-flex align-items-center justify-content-center">祝</div>
+                    {% else %}
+                      <div class="weekday d-flex align-items-center justify-content-center">{{ mt.weekday }}</div>
+                    {% endif %}
+                {% else %}
+                  <div class="weekday d-flex align-items-center justify-content-center">{{ mt.weekday }}</div>
+                {% endif %}
               </td>
               <td>
                 <div class="d-flex align-items-center justify-content-center">
