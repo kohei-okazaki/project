@@ -1,5 +1,5 @@
 from django import forms
-from kintai.models import DailyUserWorkData, UserData
+from kintai.models import UserData
 
 
 class LoginForm(forms.Form):
@@ -31,11 +31,21 @@ class UserEditForm(forms.ModelForm):
         fields = ["password", "company_cd", "division_cd"]
 
 
-class DailyworkCreateForm(forms.ModelForm):
+class DailyworkCreateForm(forms.Form):
     '''
     日次勤怠登録Form
     '''
-    class Meta:
-        model = DailyUserWorkData
-        fields = ["seq_user_id", "company_cd", "division_cd",
-                  "work_start_date", "work_end_date", "actual_work_date"]
+    # 対象年
+    year = forms.CharField(required=True, label="対象年")
+    # 対象月
+    month = forms.CharField(required=True, label="対象月")
+    # 対象日
+    day = forms.CharField(required=True, label="対象日")
+    # 作業開始(時)
+    start_hh = forms.CharField(required=True, label="作業開始(時)")
+    # 作業開始(分)
+    start_mi = forms.CharField(required=True, label="作業開始(分)")
+    # 作業終了(時)
+    end_hh = forms.CharField(required=True, label="作業終了(時)")
+    # 作業終了(分)
+    end_mi = forms.CharField(required=True, label="作業終了(分)")

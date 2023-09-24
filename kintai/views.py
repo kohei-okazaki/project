@@ -3,7 +3,7 @@ import logging
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView, CreateView
-from kintai.forms import LoginForm, UserCreateForm, UserEditForm
+from kintai.forms import DailyworkCreateForm, LoginForm, UserCreateForm, UserEditForm
 from kintai.contents.util import date_util
 from kintai.contents.dailywork import dailywork_service
 from kintai.contents.user import user_service
@@ -109,7 +109,8 @@ class DailyworkCreateView(TemplateView):
         self.params = {
             "dto_list": [],
             "yyyymm_list": [],
-            "current_month": ""
+            "current_month": "",
+            "form": DailyworkCreateForm()
         }
 
     def get(self, request: HttpRequest) -> HttpResponse:
@@ -139,9 +140,13 @@ class DailyworkCreateView(TemplateView):
 
     def post(self, request: HttpRequest) -> HttpResponse:
 
-        user: UserData = user_service.get_user(
-            seq_user_id=request.session["seq_user_id"])
-        dailywork_service.regist_daily_user_work_data(user=user, year=request.POST["year"], month=request.POST["month"], day=request.POST[
-                                                      "day"], start_hh=request.POST["start_hh"], start_mi=request.POST["start_mi"], end_hh=request.POST["end_hh"], end_mi=request.POST["end_mi"])
+        form: DailyworkCreateForm = DailyworkCreateForm(request.POST)
+
+        if (form.is_valid()):
+            user: UserData = user_service.get_user(
+                seq_user_id=request.session["seq_user_id"])
+            dailywork_service.regist_daily_user_work_data(user=user, year=form.cleaned_data["year"], month=form.cleaned_data["month"], day=form.cleaned_data[
+                                                          "day"], start_hh=form.cleaned_data["start_hh"], start_mi=form.cleaned_data[
+                                                              "start_mi"], end_hh=form.cleaned_data["end_hh"], end_mi=form.cleaned_data["end_mi"])
 
         return redirect(to="dailywork_create")

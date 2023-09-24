@@ -48,6 +48,7 @@ def regist_daily_user_work_data(user: UserData, year: str, month: str, day: str,
         work_data: DailyUserWorkData = daily_user_work_data_list.first()
         work_data.work_start_date = work_start_date
         work_data.work_end_date = work_end_date
+        work_data.actual_work_date = actual_work_date
         work_data.save()
 
     else:
