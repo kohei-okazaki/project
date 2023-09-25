@@ -14,15 +14,14 @@
 
 # プロジェクトの作り方
 
-## Anaconda navigator を開く
+## Anaconda Navigator を開く
 
-仮想環境を作成。（Environments=app2）  
-django を install
-
-作成した仮想環境で ▶ ボタン押下  
-「Open terminal」押下  
-ターミナルが出るので、作成したいプロジェクトまで移動して `django-admin startproject ${project_name}` を入力し、プロジェクトを初期化。  
-「asgi.py」や「settings.py」などがあるはず。
+1. 仮想環境を作成。（Environments=app2）  
+2. django を install
+3. 作成した仮想環境で ▶ ボタン押下  
+4. 「Open terminal」押下  
+5. ターミナルが出るので、作成したいプロジェクトまで移動して `django-admin startproject ${project_name}` を入力し、プロジェクトを初期化。  
+6. 「asgi.py」や「settings.py」などがあるはず。
 
 ## Anaconda Prompt を開く
 
@@ -44,8 +43,8 @@ django を install
 
 # URL マッピング
 
-管理アプリ=http://127.0.0.1:8000/admin/login/  
-勤怠アプリ=http://127.0.0.1:8000/kintai/login/
+管理アプリ=http://127.0.0.1:8085/admin/login/  
+勤怠アプリ=http://127.0.0.1:8085/kintai/login/
 
 # DB 設定
 
@@ -63,7 +62,7 @@ django を install
 
 1. プロジェクトフォルダまで「Anaconda Terminal」で移動
 2. `python manage.py createsuperuser`
-3. `username=admin, mail_address=任意のメールアドレス, password=adminPass`
+3. `username=admin, password=adminPass`
 
 # Git への反映
 
