@@ -1,9 +1,10 @@
 # バージョン情報
-| 名前 | バージョン |
-| ---- | ---- |
-| Python | 3.8.17 | 
-| pip | 23.2.1 | 
-| django | 4.1 | 
+
+| 名前   | バージョン |
+| ------ | ---------- |
+| Python | 3.8.17     |
+| pip    | 23.2.1     |
+| django | 4.1        |
 
 # プロジェクト構成
 
@@ -16,12 +17,19 @@
 ## Anaconda navigator を開く
 
 仮想環境を作成。（Environments=app2）  
- django を install
+django を install
 
 作成した仮想環境で ▶ ボタン押下  
 「Open terminal」押下  
- ターミナルが出るので、作成したいプロジェクトまで移動して `django-admin startproject ${project_name}` を入力し、プロジェクトを初期化。  
- 「asgi.py」や「settings.py」などがあるはず。
+ターミナルが出るので、作成したいプロジェクトまで移動して `django-admin startproject ${project_name}` を入力し、プロジェクトを初期化。  
+「asgi.py」や「settings.py」などがあるはず。
+
+## Anaconda Prompt を開く
+
+1. 検索窓から`Anaconda Prompt`
+2. `activate app2`
+3. `D:`
+4. `cd app2\project`
 
 # プロジェクト起動方法
 
@@ -55,7 +63,7 @@
 
 1. プロジェクトフォルダまで「Anaconda Terminal」で移動
 2. `python manage.py createsuperuser`
-3. username=admin, mail_address=admin@gmail.com, password=adminPass
+3. `username=admin, mail_address=任意のメールアドレス, password=adminPass`
 
 # Git への反映
 
