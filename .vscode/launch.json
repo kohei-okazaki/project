@@ -1,19 +1,24 @@
 {
-    // IntelliSense を使用して利用可能な属性を学べます。
-    // 既存の属性の説明をホバーして表示します。
-    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Python Django",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}\\manage.py",
-            "args": [
-                "runserver", "8085", "--insecure"
-            ],
-            "django": true,
-            "justMyCode": true
-        }
-    ]
+  // IntelliSense を使用して利用可能な属性を学べます。
+  // 既存の属性の説明をホバーして表示します。
+  // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python Django",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}\\manage.py",
+      "args": [
+        // ローカル
+        "runserver", "8085"
+        // 開発
+        // "runserver", "--settings=project.env.dev"
+        // 本番
+        // "runserver", "--settings=project.env.prod"
+      ],
+      "django": true,
+      "justMyCode": true
+    }
+  ]
 }
