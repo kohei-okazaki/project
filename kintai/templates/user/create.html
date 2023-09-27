@@ -4,19 +4,20 @@
 <div class="container">
   <div class="space-50"></div>
   <div class="login-frame">
-  <form method="post" action="{% url 'user_create' %}">
+    <div class="space-40"></div>
+    <form method="post" action="{% url 'user_create' %}">
     {% csrf_token %}
-    <div class="mb-3">
-      <input id="password" class="form-control bg-light placeholder" name="password" placeholder="パスワード" />
-    </div>
-    <div class="mb-3">
-      <input id="company_cd" class="form-control bg-light placeholder" name="company_cd" placeholder="企業コード" />
-    </div>
-    <div class="mb-3">
-      <input id="division_cd" class="form-control bg-light placeholder" name="division_cd" placeholder="部署コード" />
-    </div>
-    <input type="submit" class="btn btn-primary login-button bold" value="作成" />
-  </form>
+      <div class="mb-3">
+        <input id="password" class="form-control bg-light placeholder" name="password" placeholder="パスワード" />
+      </div>
+      <div class="mb-3">
+        <input id="company_cd" class="form-control bg-light placeholder" name="company_cd" placeholder="企業コード" />
+      </div>
+      <div class="mb-3">
+        <input id="division_cd" class="form-control bg-light placeholder" name="division_cd" placeholder="部署コード" />
+      </div>
+      <input type="submit" class="btn btn-primary login-button bold" value="作成" />
+    </form>
   <div class="space-10"></div>
   </div>
 </div>

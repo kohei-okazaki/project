@@ -13,16 +13,26 @@ FORMAT_HHMISS_SEP = "%H:%M:%S"
 
 
 def get_sysdate() -> datetime:
-    '''
-    システム日時のdatetimeを返す
-    '''
+    """
+    システム日時を返す
+
+    Returns:
+        datetime: システム日時
+    """
     return datetime.datetime.now()
 
 
 def to_str(dt: datetime, format: str) -> str:
-    '''
+    """
     datetime => 文字列形式
-    '''
+
+    Args:
+        dt (datetime): 変換前のdatetime
+        format (str): 変換フォーマット
+
+    Returns:
+        str: 変換後の文字列形式
+    """
     if (dt is None):
         logger.warn("引数が未指定. dt=None")
         return None
@@ -30,9 +40,16 @@ def to_str(dt: datetime, format: str) -> str:
 
 
 def to_date(str: str, format: str) -> datetime:
-    '''
+    """
     文字列 => datetime
-    '''
+
+    Args:
+        str (str): 変換前の文字列形式の日付
+        format (str): 変換フォーマット
+
+    Returns:
+        datetime: 変換後のdatetime
+    """
     if (str is None):
         logger.warn("引数が未指定. str=None")
         return None
