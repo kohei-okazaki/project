@@ -61,9 +61,14 @@ class LoginView(TemplateView):
 
 
 class TopView(TemplateView):
-    '''
-    TOP画面View
-    '''
+    """TOP画面View
+
+    Args:
+        TemplateView (_type_): テンプレートView
+
+    Returns:
+        HttpResponse: レスポンス情報
+    """
 
     def get(self, request: HttpRequest) -> HttpResponse:
         if ("seq_user_id" in request.session):

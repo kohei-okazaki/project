@@ -19,7 +19,7 @@ def get_user_by_id_and_password(dto: UserDataDto) -> list:
         list: ユーザ情報Dtoリスト
     """
 
-    user_data_list = UserData.objects.filter(seq_user_id=dto.seq_user_id, password=dto.password)
+    user_data_list: list = UserData.objects.filter(seq_user_id=dto.seq_user_id, password=dto.password)
     dto_list: list = list()
 
     for user_data in user_data_list:
