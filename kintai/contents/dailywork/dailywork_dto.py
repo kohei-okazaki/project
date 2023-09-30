@@ -1,6 +1,6 @@
 
 import datetime
-from kintai.models import BusinessCalendarMt
+from kintai.models import BusinessCalendarMt, DailyUserWorkData
 
 
 class DailyworkDto(BusinessCalendarMt):
@@ -9,3 +9,11 @@ class DailyworkDto(BusinessCalendarMt):
     '''
     work_start_date: datetime = None
     work_end_date: datetime = None
+
+class BusinessCalendarMtDto(BusinessCalendarMt):
+    """営業日マスタDto
+    """
+
+class DailyUserWorkDataDto(DailyUserWorkData):
+    """日別ユーザ勤怠情報Dto
+    """

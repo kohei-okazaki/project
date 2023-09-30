@@ -1,32 +1,136 @@
 import datetime
 import decimal
-from kintai.contents.dailywork.dailywork_dto import DailyworkDto
+from kintai.contents.dailywork.dailywork_dto import BusinessCalendarMtDto, DailyUserWorkDataDto, DailyworkDto
+from kintai.contents.user.user_data_dto import UserDataDto
 from kintai.contents.util import date_util
-from kintai.models import BusinessCalendarMt, DailyUserWorkData, UserData
+from kintai.models import BusinessCalendarMt, DailyUserWorkData
 
 
-def get_business_calendar_mt_list(from_date: datetime, to_date: datetime) -> list:
-    '''
-    対象年月期間の営業日マスタを取得
-    '''
-    return BusinessCalendarMt.objects.filter(date__range=[from_date, to_date])
+def get_daily_user_work_dto_list(user: UserDataDto, yyyymm: str) -> list:
+    """対象ユーザと対象年月の営業日マスタリストと日別ユーザ勤怠情報リストをマージしたリストを返す
+
+    Args:
+        user (UserDataDto): ユーザ情報Dto
+        yyyymm (str): 対象年月
+
+    Returns:
+        list: 営業日マスタリストと日別ユーザ勤怠情報リストをマージしたリスト
+    """
+
+    from_date: datetime = date_util.get_first_date_str(yyyymm)
+    to_date: datetime = date_util.get_last_date_str(yyyymm)
+
+    # 対象年月の営業日マスタリストを取得
+    business_calendar_mt_dto_list: list = get_business_calendar_mt_dto_list(
+        from_date, to_date)
+
+    # 対象年月の日別ユーザ勤怠情報リストを取得
+    daily_user_work_data_list: list = get_daily_user_work_data_dto_list(
+        user, from_date, to_date)
+
+    dto_list: list = []
+    for business_calendar_mt_dto in business_calendar_mt_dto_list:
+        dto: DailyworkDto = DailyworkDto()
+        dto.date = business_calendar_mt_dto.date
+        dto.weekday = business_calendar_mt_dto.weekday
+        dto.business_flg = business_calendar_mt_dto.business_flg
+
+        for user_work in daily_user_work_data_list:
+            if date_util.to_str(business_calendar_mt_dto.date, date_util.FORMAT_YYYYMMDD) == date_util.to_str(user_work.work_start_date, date_util.FORMAT_YYYYMMDD):
+                # 登録がある場合
+                dto.work_start_date = user_work.work_start_date
+                dto.work_end_date = user_work.work_end_date
+
+        dto_list.append(dto)
+
+    return dto_list
 
 
-def get_actual_work_date(start_hh: str, start_mi: str, end_hh: str, end_mi: str) -> decimal:
-    '''
-    実労働時間を取得
-    '''
-    start: datetime = date_util.to_date(
-        start_hh + ":" + start_mi + ":00", date_util.FORMAT_HHMISS_SEP)
-    end: datetime = date_util.to_date(
-        end_hh + ":" + end_mi + ":00", date_util.FORMAT_HHMISS_SEP)
-    return (end - start).seconds / 60 / 60
+def get_business_calendar_mt_dto_list(from_date: datetime, to_date: datetime) -> list:
+    """対象年月期間の営業日マスタDtoのリストを返す
+
+    Args:
+        from_date (datetime): 開始日
+        to_date (datetime): 終了日
+
+    Returns:
+        list: 営業日マスタDtoのリスト
+    """
+
+    mt_list = BusinessCalendarMt.objects.filter(
+        date__range=[from_date, to_date])
+    dto_list: list = list()
+
+    for mt in mt_list:
+
+        dto: BusinessCalendarMtDto = BusinessCalendarMtDto()
+        dto.seq_business_calendar_mt_id = mt.seq_business_calendar_mt_id
+        dto.date = mt.date
+        dto.weekday = mt.weekday
+        dto.business_flg = mt.business_flg
+        dto.reg_date = mt.reg_date
+        dto.update_date = mt.update_date
+
+        dto_list.append(dto)
+
+    return dto_list
 
 
-def regist_daily_user_work_data(user: UserData, year: str, month: str, day: str, start_hh: str, start_mi: str, end_hh: str, end_mi: str) -> bool:
-    '''
-    DAILY_USER_WORK_DATAを登録する
-    '''
+def get_daily_user_work_data_dto_list(user: UserDataDto, from_date: datetime, to_date: datetime) -> list:
+    """ユーザ情報Dtoと取得対象年月(from)と取得対象年月(to)より、日別ユーザ勤怠情報Dtoのリストを返す
+
+    Args:
+        user (UserData): ユーザ情報Dto
+        from_date (datetime): 取得対象年月(from)
+        to_date (datetime): 取得対象年月(to)
+
+    Returns:
+        list: _description_
+    """
+
+    user_work_list: list = DailyUserWorkData.objects.filter(
+        seq_user_id=user.seq_user_id, work_start_date__range=[from_date, to_date])
+
+    dto_list: list = list()
+
+    for user_work in user_work_list:
+
+        dto: DailyUserWorkDataDto = DailyUserWorkDataDto()
+        dto.seq_daily_user_work_data_id = user_work.seq_daily_user_work_data_id
+        dto.seq_user_id = user_work.seq_user_id
+        dto.company_cd = user_work.company_cd
+        dto.division_cd = user_work.division_cd
+        dto.work_data_reg_date = user_work.work_data_reg_date
+        dto.work_start_date = user_work.work_start_date
+        dto.work_end_date = user_work.work_end_date
+        dto.actual_work_date = user_work.actual_work_date
+        dto.approval_flg = user_work.approval_flg
+        dto.cancel_flg = user_work.cancel_flg
+        dto.reg_date = user_work.reg_date
+        dto.update_date = user_work.update_date
+
+        dto_list.append(dto)
+
+    return dto_list
+
+
+def regist_daily_user_work_data(user: UserDataDto, year: str, month: str, day: str, start_hh: str, start_mi: str, end_hh: str, end_mi: str) -> bool:
+    """DAILY_USER_WORK_DATAを登録する
+
+    Args:
+        user (UserDataDto): ユーザ情報Dto
+        year (str): 年
+        month (str): 月
+        day (str): 日
+        start_hh (str): 開始時間(時)
+        start_mi (str): 開始時間(分)
+        end_hh (str): 終了時間(時)
+        end_mi (str): 終了時間(分)
+
+    Returns:
+        bool: 登録処理成功の場合True、それ以外の場合False
+    """
+
     seq_user_id: int = user.seq_user_id
     company_cd: str = user.company_cd
     division_cd: str = user.division_cd
@@ -65,41 +169,21 @@ def regist_daily_user_work_data(user: UserData, year: str, month: str, day: str,
     return True
 
 
-def get_daily_user_work_data_list(user: UserData, from_date: datetime, to_date: datetime) -> list:
-    '''
-    ユーザIDと取得対象年月(from)と取得対象年月(to)より、DAILY_USER_WORK_DATAのリストを取得する
-    '''
-    return DailyUserWorkData.objects.filter(seq_user_id=user.seq_user_id, work_start_date__range=[from_date, to_date])
+def get_actual_work_date(start_hh: str, start_mi: str, end_hh: str, end_mi: str) -> decimal:
+    """実労働時間を取得
 
+    Args:
+        start_hh (str): 開始時間(時)
+        start_mi (str): 開始時間(分)
+        end_hh (str): 終了時間(時)
+        end_mi (str): 終了時間(分)
 
-def get_daily_user_work_dto_list(user: UserData, yyyymm: str) -> list:
-    '''
-    対象ユーザと対象年月の営業日マスタリストと日別ユーザ勤怠情報リストをマージしたリストを返す
-    '''
+    Returns:
+        decimal: 実労働時間(n.n)形式
+    """
 
-    from_date: datetime = date_util.get_first_date_str(yyyymm)
-    to_date: datetime = date_util.get_last_date_str(yyyymm)
-
-    # 対象年月の営業日マスタリストを取得
-    mt_list: list = get_business_calendar_mt_list(from_date, to_date)
-
-    # 対象年月の日別ユーザ勤怠情報リストを取得
-    daily_user_work_data_list: list = get_daily_user_work_data_list(
-        user, from_date, to_date)
-
-    dto_list: list = []
-    for mt in mt_list:
-        dto: DailyworkDto = DailyworkDto()
-        dto.date = mt.date
-        dto.weekday = mt.weekday
-        dto.business_flg = mt.business_flg
-
-        for user_work in daily_user_work_data_list:
-            if date_util.to_str(mt.date, date_util.FORMAT_YYYYMMDD) == date_util.to_str(user_work.work_start_date, date_util.FORMAT_YYYYMMDD):
-                # 登録がある場合
-                dto.work_start_date = user_work.work_start_date
-                dto.work_end_date = user_work.work_end_date
-
-        dto_list.append(dto)
-
-    return dto_list
+    start: datetime = date_util.to_date(
+        start_hh + ":" + start_mi + ":00", date_util.FORMAT_HHMISS_SEP)
+    end: datetime = date_util.to_date(
+        end_hh + ":" + end_mi + ":00", date_util.FORMAT_HHMISS_SEP)
+    return (end - start).seconds / 60 / 60

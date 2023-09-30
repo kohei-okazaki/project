@@ -8,7 +8,6 @@ from kintai.forms import DailyworkCreateForm, LoginForm, UserCreateForm, UserEdi
 from kintai.contents.util import date_util, company_mt_service, division_mt_service
 from kintai.contents.dailywork import dailywork_service
 from kintai.contents.user import user_service
-from kintai.models import UserData
 
 # Logger
 logger: logging.Logger = logging.getLogger(__name__)
@@ -155,9 +154,14 @@ class UserEditView(TemplateView):
 
 
 class DailyworkCreateView(TemplateView):
-    '''
-    日次勤怠登録View
-    '''
+    """日次勤怠登録View
+
+    Args:
+        TemplateView (_type_): テンプレートView
+
+    Returns:
+        HttpResponse: レスポンス情報
+    """
 
     def __init__(self):
         self.params = {
@@ -183,7 +187,7 @@ class DailyworkCreateView(TemplateView):
             yyyymm = request.GET["yyyymm"]
 
         yyyymm: str = date_util.get_str_yyyymm(yyyymm)
-        user: UserData = user_service.get_user(
+        user: UserDataDto = user_service.get_user_data_dto(
             seq_user_id=request.session["seq_user_id"])
 
         self.params["current_month"] = yyyymm
@@ -197,7 +201,7 @@ class DailyworkCreateView(TemplateView):
         form: DailyworkCreateForm = DailyworkCreateForm(request.POST)
 
         if (form.is_valid()):
-            user: UserData = user_service.get_user(
+            user: UserDataDto = user_service.get_user_data_dto(
                 seq_user_id=request.session["seq_user_id"])
             dailywork_service.regist_daily_user_work_data(user=user, year=form.cleaned_data["year"], month=form.cleaned_data["month"], day=form.cleaned_data[
                                                           "day"], start_hh=form.cleaned_data["start_hh"], start_mi=form.cleaned_data[
