@@ -10,13 +10,19 @@ from kintai.contents.dailywork import dailywork_service
 from kintai.contents.user import user_service
 from kintai.models import UserData
 
-logger = logging.getLogger(__name__)
+# Logger
+logger: logging.Logger = logging.getLogger(__name__)
 
 
 class LoginView(TemplateView):
-    '''
-    ログインView
-    '''
+    """ログインView
+
+    Args:
+        TemplateView (_type_): テンプレートView
+
+    Returns:
+        HttpResponse: レスポンス情報
+    """
 
     def __init__(self):
         self.params = {
@@ -35,9 +41,12 @@ class LoginView(TemplateView):
         loginForm: LoginForm = LoginForm(request.POST)
         if (loginForm.is_valid()):
 
-            user_list = user_service.get_user_by_id_and_password(
-                loginForm.cleaned_data["seq_user_id"], loginForm.cleaned_data["password"])
-            if (user_list.count() < 1):
+            dto: UserDataDto = UserDataDto()
+            dto.seq_user_id = loginForm.cleaned_data["seq_user_id"]
+            dto.password = loginForm.cleaned_data["password"]
+            dto_list = user_service.get_user_by_id_and_password(dto)
+
+            if (len(dto_list) < 1):
                 params = {
                     "errorMessage": "ユーザが存在しません"
                 }
