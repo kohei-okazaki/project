@@ -11,10 +11,20 @@
         <input id="password" class="form-control bg-light placeholder" name="password" placeholder="パスワード" />
       </div>
       <div class="mb-3">
-        <input id="company_cd" class="form-control bg-light placeholder" name="company_cd" placeholder="企業コード" />
+        <select id="company_cd" class="form-select" name="company_cd">
+          <option selected disabled value="" style="display:none;">企業コード</option>
+          {% for mt in company_mt_list %}
+          <option value={{ mt.company_cd }}>{{ mt.company_cd }} : {{ mt.name }}</option>
+          {% endfor %}
+        </select>
       </div>
       <div class="mb-3">
-        <input id="division_cd" class="form-control bg-light placeholder" name="division_cd" placeholder="部署コード" />
+        <select id="division_cd" class="form-select" name="division_cd">
+          <option selected disabled value="" style="display:none;">部署コード</option>
+          {% for mt in division_mt_list %}
+          <option value={{ mt.division_cd }}>{{ mt.division_cd }} : {{ mt.name }}</option>
+          {% endfor %}
+        </select>
       </div>
       <input type="submit" class="btn btn-primary login-button bold" value="作成" />
     </form>

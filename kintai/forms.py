@@ -13,13 +13,16 @@ class LoginForm(forms.Form):
     password = forms.CharField(required=True, label="パスワード")
 
 
-class UserCreateForm(forms.ModelForm):
+class UserCreateForm(forms.Form):
     '''
     ユーザ作成Form
     '''
-    class Meta:
-        model = UserData
-        fields = ["password", "company_cd", "division_cd"]
+    # パスワード
+    password = forms.CharField(required=True, label="パスワード")
+    # 企業コード
+    company_cd = forms.CharField(required=True, max_length=5, label="企業コード")
+    # 部署コード
+    division_cd = forms.CharField(required=True, max_length=5, label="部署コード")
 
 
 class UserEditForm(forms.ModelForm):

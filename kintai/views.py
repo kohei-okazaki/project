@@ -2,9 +2,10 @@ import datetime
 import logging
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import TemplateView
+from kintai.contents.user.user_data_dto import UserDataDto
 from kintai.forms import DailyworkCreateForm, LoginForm, UserCreateForm, UserEditForm
-from kintai.contents.util import date_util
+from kintai.contents.util import date_util, company_mt_service, division_mt_service
 from kintai.contents.dailywork import dailywork_service
 from kintai.contents.user import user_service
 from kintai.models import UserData
@@ -61,13 +62,43 @@ class TopView(TemplateView):
         return render(request, "login/index.html")
 
 
-class UserCreateView(CreateView):
-    '''
-    ユーザ作成View
-    '''
-    template_name = "user/create.html"
-    form_class = UserCreateForm
-    success_url = "/kintai/login"
+class UserCreateView(TemplateView):
+    """ユーザ作成View
+
+    Args:
+        TemplateView (_type_): テンプレートView
+
+    Returns:
+        HttpResponse: レスポンス情報
+    """
+
+    def __init__(self):
+        self.params = {
+            "form": UserCreateForm(),
+            "company_mt_list": [],
+            "division_mt_list": [],
+        }
+
+    def get(self, request):
+
+        # 企業マスタリストを取得
+        self.params["company_mt_list"] = company_mt_service.get_company_mt_list("company_cd")
+        # 部署マスタリストを取得
+        self.params["division_mt_list"] = division_mt_service.get_division_mt_list("division_cd")
+
+        return render(request, "user/create.html", self.params)
+
+    def post(self, request):
+
+        form: UserCreateForm = UserCreateForm(request.POST)
+        if (form.is_valid()):
+            dto: UserDataDto = UserDataDto()
+            dto.password = form.cleaned_data["password"]
+            dto.company_cd = form.cleaned_data["company_cd"]
+            dto.division_cd = form.cleaned_data["division_cd"]
+            user_service.regist_user(dto)
+
+        return redirect(to="login")
 
 
 class UserEditView(TemplateView):
