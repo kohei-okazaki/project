@@ -19,11 +19,12 @@ def get_user_by_id_and_password(dto: UserDataDto) -> list:
         list: ユーザ情報Dtoリスト
     """
 
-    user_data_list: list = UserData.objects.filter(seq_user_id=dto.seq_user_id, password=dto.password)
+    user_data_list: list = UserData.objects.filter(
+        seq_user_id=dto.seq_user_id, password=dto.password)
     dto_list: list = list()
 
     for user_data in user_data_list:
-        
+
         dto: UserDataDto = UserDataDto()
         dto.seq_user_id = user_data.seq_user_id
         dto.password = user_data.password
@@ -32,7 +33,7 @@ def get_user_by_id_and_password(dto: UserDataDto) -> list:
         dto.del_flg = user_data.del_flg
         dto.reg_date = user_data.reg_date
         dto.update_date = user_data.update_date
-        
+
         dto_list.append(dto)
 
     return dto_list
@@ -48,12 +49,12 @@ def regist_user(dto: UserDataDto) -> bool:
         bool: 登録処理成功の場合True、それ以外の場合False
     """
 
-    user_date: UserData = UserData(
+    user_data: UserData = UserData(
         password=dto.password,
         company_cd=dto.company_cd,
         division_cd=dto.division_cd,
     )
 
-    user_date.save()
+    user_data.save()
 
     return True
