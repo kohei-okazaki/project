@@ -1,9 +1,9 @@
-from kintai.contents.user.user_data_dto import UserDataDto
+from kintai.contents.util.dto import UserDataDto
 from kintai.models import UserData
 
 
 def get_user_data_dto(seq_user_id: int) -> UserDataDto:
-    """USER_DATAをSEQ_USER_IDをキーに検索する
+    """ユーザ情報をユーザIDをキーに検索する
 
     Args:
         seq_user_id (int): ユーザID
@@ -19,7 +19,7 @@ def get_user_data_dto(seq_user_id: int) -> UserDataDto:
 
 
 def get_user_by_id_and_password(dto: UserDataDto) -> list:
-    """USER_DATAをSEQ_USER_IDとパスワードをキーに検索する
+    """ユーザ情報をユーザIDとパスワードをキーに検索する
 
     Args:
         dto (UserDataDto): ユーザ情報Dto

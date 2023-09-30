@@ -3,7 +3,7 @@ import logging
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
-from kintai.contents.user.user_data_dto import UserDataDto
+from kintai.contents.util.dto import UserDataDto
 from kintai.forms import DailyworkCreateForm, LoginForm, UserCreateForm, UserEditForm
 from kintai.contents.util import date_util, company_mt_service, division_mt_service
 from kintai.contents.dailywork import dailywork_service

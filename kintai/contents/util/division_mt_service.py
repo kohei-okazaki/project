@@ -1,8 +1,9 @@
+from kintai.contents.util.dto import DivisionMtDto
 from kintai.models import DivisionMt
 
 
 def get_division_mt_dto_list(orderby: str) -> list:
-    """_summary_
+    """部署マスタDtoのリストを返す
 
     Args:
         orderby (str): ORDER BY句
@@ -23,7 +24,7 @@ def get_division_mt_dto_list(orderby: str) -> list:
 
     for mt in mt_list:
 
-        dto: DivisionMt = DivisionMt()
+        dto: DivisionMtDto = DivisionMtDto()
         dto.division_cd = mt.division_cd
         dto.name = mt.name
         dto.del_flg = mt.del_flg

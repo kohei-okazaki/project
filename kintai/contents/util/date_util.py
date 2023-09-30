@@ -57,10 +57,15 @@ def to_date(str: str, format: str) -> datetime:
 
 
 def get_str_yyyymm(str: str) -> str:
-    '''
-    文字列形式のYYYYMMを返す
+    """
     引数が未指定の場合、システム日付を返す
-    '''
+
+    Args:
+        str (str): 文字列形式の日付
+
+    Returns:
+        str: 文字列形式の日付
+    """
     if (str is None):
         logger.warn("引数が未指定. str=None")
         return to_str(datetime.datetime.now().date(), FORMAT_YYYYMM)
@@ -68,36 +73,62 @@ def get_str_yyyymm(str: str) -> str:
 
 
 def get_any_month(dt: datetime, month: int) -> datetime:
-    '''
-    指定されたdatetimeにmonthを加算して返す
-    '''
+    """指定されたdatetimeにmonthを加算して返す
+
+    Args:
+        dt (datetime): 加算対象datetime
+        month (int): 加算月数
+
+    Returns:
+        datetime: 加算済のdatetime
+    """
     return dt + relativedelta(months=month)
 
 
 def get_first_date_str(str: str) -> datetime:
-    '''
-    yyyymm形式の年月の月初のdatetimeを返す
-    '''
+    """yyyymm形式の年月の月初のdatetimeを返す
+
+    Args:
+        str (str): 対象年月
+
+    Returns:
+        datetime: 月初のdatetime
+    """
     return to_date(str + "01", FORMAT_YYYYMMDD)
 
 
 def getFirstDate(dt: datetime) -> datetime:
-    '''
-    datetime形式の年月の月初のdatetimeを返す
-    '''
+    """datetime形式の年月の月初のdatetimeを返す
+
+    Args:
+        dt (datetime): 対象年月
+
+    Returns:
+        datetime: 月初のdatetime
+    """
     return dt.replace(day=1)
 
 
 def get_last_date_str(str: str) -> datetime:
-    '''
-    yyyymm形式の年月の月末のdatetimeを返す
-    '''
+    """yyyymm形式の年月の月末のdatetimeを返す
+
+    Args:
+        str (str): 対象年月
+
+    Returns:
+        datetime: 月末のdatetime
+    """
     dt: datetime = to_date(str + "01", FORMAT_YYYYMMDD)
     return get_last_date(dt)
 
 
 def get_last_date(dt: datetime) -> datetime:
-    '''
-    datetime形式の年月の月末のdatetimeを返す
-    '''
+    """datetime形式の年月の月末のdatetimeを返す
+
+    Args:
+        str (str): 対象年月
+
+    Returns:
+        datetime: 月末のdatetime
+    """
     return dt.replace(day=calendar.monthrange(dt.year, dt.month)[1])

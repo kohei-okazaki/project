@@ -2,9 +2,11 @@ from django import forms
 
 
 class LoginForm(forms.Form):
-    '''
-    ログインForm
-    '''
+    """ログインForm
+
+    Args:
+        forms (_type_): フォームクラス
+    """
 
     # ユーザID
     seq_user_id = forms.IntegerField(required=True, label="ユーザID")
@@ -13,9 +15,11 @@ class LoginForm(forms.Form):
 
 
 class UserCreateForm(forms.Form):
-    '''
-    ユーザ作成Form
-    '''
+    """ユーザ作成Form
+
+    Args:
+        forms (_type_): フォームクラス
+    """
     # パスワード
     password = forms.CharField(required=True, label="パスワード")
     # 企業コード
@@ -25,17 +29,21 @@ class UserCreateForm(forms.Form):
 
 
 class UserEditForm(forms.Form):
-    '''
-    ユーザ設定Form
-    '''
+    """ユーザ設定Form
+
+    Args:
+        forms (_type_): フォームクラス
+    """
     # パスワード
     password = forms.CharField(required=True, label="パスワード")
 
 
 class DailyworkCreateForm(forms.Form):
-    '''
-    日次勤怠登録Form
-    '''
+    """日次勤怠登録Form
+
+    Args:
+        forms (_type_): フォームクラス
+    """
     # 対象年
     year = forms.CharField(required=True, label="対象年")
     # 対象月

@@ -1,9 +1,9 @@
-from kintai.contents.util.company_mt_dto import CompanyMtDto
+from kintai.contents.util.dto import CompanyMtDto
 from kintai.models import CompanyMt
 
 
 def get_company_mt_dto_list(orderby: str) -> list:
-    """_summary_
+    """企業マスタDtoのリストを返す
 
     Args:
         orderby (str): ORDER BY句
