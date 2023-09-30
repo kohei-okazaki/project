@@ -1,5 +1,4 @@
 from django import forms
-from kintai.models import UserData
 
 
 class LoginForm(forms.Form):
@@ -25,13 +24,12 @@ class UserCreateForm(forms.Form):
     division_cd = forms.CharField(required=True, max_length=5, label="部署コード")
 
 
-class UserEditForm(forms.ModelForm):
+class UserEditForm(forms.Form):
     '''
     ユーザ設定Form
     '''
-    class Meta:
-        model = UserData
-        fields = ["password", "company_cd", "division_cd"]
+    # パスワード
+    password = forms.CharField(required=True, label="パスワード")
 
 
 class DailyworkCreateForm(forms.Form):

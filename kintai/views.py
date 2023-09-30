@@ -118,9 +118,14 @@ class UserCreateView(TemplateView):
 
 
 class UserEditView(TemplateView):
-    '''
-    ユーザ編集View
-    '''
+    """ユーザ編集View
+
+    Args:
+        TemplateView (_type_): テンプレートView
+
+    Returns:
+        HttpResponse: レスポンス情報
+    """
 
     def __init__(self):
         self.params = {
@@ -129,7 +134,7 @@ class UserEditView(TemplateView):
 
     def get(self, request: HttpRequest) -> HttpResponse:
 
-        current_user: UserData = user_service.get_user(
+        current_user: UserDataDto = user_service.get_user_data_dto(
             request.session["seq_user_id"])
 
         self.params["form"] = current_user
@@ -138,11 +143,13 @@ class UserEditView(TemplateView):
 
     def post(self, request: HttpRequest) -> HttpResponse:
 
-        current_user: UserData = user_service.get_user(
-            request.session["seq_user_id"])
+        form: UserEditForm = UserEditForm(request.POST)
 
-        user: UserEditForm = UserEditForm(request.POST, instance=current_user)
-        user.save()
+        if form.is_valid():
+            current_user: UserDataDto = user_service.get_user_data_dto(
+                request.session["seq_user_id"])
+            current_user.password = form.cleaned_data["password"]
+            user_service.update_user(current_user)
 
         return redirect(to="user_edit")
 
