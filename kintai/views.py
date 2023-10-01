@@ -143,7 +143,6 @@ class UserEditView(TemplateView):
     def post(self, request: HttpRequest) -> HttpResponse:
 
         form: UserEditForm = UserEditForm(request.POST)
-
         if form.is_valid():
             current_user: UserDataDto = user_service.get_user_data_dto(
                 request.session["seq_user_id"])

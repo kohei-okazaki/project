@@ -36,6 +36,7 @@ class DailyUserWorkData(Model):
     actual_work_date = models.CharField(db_column="ACTUAL_WORK_TIME", max_length=4, null=False, help_text='実労働時間')
     approval_flg = models.BooleanField(db_column="APPROVAL_FLG", default=False, null=False, help_text='承認フラグ')
     cancel_flg = models.BooleanField(db_column="CANCEL_FLG", default=False, null=False, help_text='取消申請フラグ')
+    note = models.CharField(db_column="NOTE", null=True, max_length=128, help_text='備考')
     reg_date = models.DateTimeField(db_column="REG_DATE", auto_now_add=True, null=False, help_text='登録日時')
     update_date = models.DateTimeField(db_column="UPDATE_DATE", auto_now=True, null=False, help_text='更新日時')
 

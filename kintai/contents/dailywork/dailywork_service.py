@@ -58,19 +58,7 @@ def get_business_calendar_mt_dto_list(from_date: datetime, to_date: datetime) ->
 
     mt_list = BusinessCalendarMt.objects.filter(
         date__range=[from_date, to_date])
-    dto_list: list = list()
-
-    for mt in mt_list:
-
-        dto: BusinessCalendarMtDto = BusinessCalendarMtDto()
-        dto.seq_business_calendar_mt_id = mt.seq_business_calendar_mt_id
-        dto.date = mt.date
-        dto.weekday = mt.weekday
-        dto.business_flg = mt.business_flg
-        dto.reg_date = mt.reg_date
-        dto.update_date = mt.update_date
-
-        dto_list.append(dto)
+    dto_list: list = list(BusinessCalendarMtDto(mt) for mt in mt_list)
 
     return dto_list
 
@@ -89,26 +77,8 @@ def get_daily_user_work_data_dto_list(user: UserDataDto, from_date: datetime, to
 
     user_work_list: list = DailyUserWorkData.objects.filter(
         seq_user_id=user.seq_user_id, work_start_date__range=[from_date, to_date])
-
-    dto_list: list = list()
-
-    for user_work in user_work_list:
-
-        dto: DailyUserWorkDataDto = DailyUserWorkDataDto()
-        dto.seq_daily_user_work_data_id = user_work.seq_daily_user_work_data_id
-        dto.seq_user_id = user_work.seq_user_id
-        dto.company_cd = user_work.company_cd
-        dto.division_cd = user_work.division_cd
-        dto.work_data_reg_date = user_work.work_data_reg_date
-        dto.work_start_date = user_work.work_start_date
-        dto.work_end_date = user_work.work_end_date
-        dto.actual_work_date = user_work.actual_work_date
-        dto.approval_flg = user_work.approval_flg
-        dto.cancel_flg = user_work.cancel_flg
-        dto.reg_date = user_work.reg_date
-        dto.update_date = user_work.update_date
-
-        dto_list.append(dto)
+    dto_list: list = list(DailyUserWorkDataDto(user_work)
+                          for user_work in user_work_list)
 
     return dto_list
 
