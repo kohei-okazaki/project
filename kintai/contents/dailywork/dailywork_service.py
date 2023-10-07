@@ -39,6 +39,7 @@ def get_daily_user_work_dto_list(user: UserDataDto, yyyymm: str) -> list:
                 # 登録がある場合
                 dto.work_start_date = user_work.work_start_date
                 dto.work_end_date = user_work.work_end_date
+                dto.note = user_work.note
 
         dto_list.append(dto)
 
@@ -83,7 +84,7 @@ def get_daily_user_work_data_dto_list(user: UserDataDto, from_date: datetime, to
     return dto_list
 
 
-def regist_daily_user_work_data(user: UserDataDto, year: str, month: str, day: str, start_hh: str, start_mi: str, end_hh: str, end_mi: str) -> bool:
+def regist_daily_user_work_data(user: UserDataDto, year: str, month: str, day: str, start_hh: str, start_mi: str, end_hh: str, end_mi: str, note: str) -> bool:
     """DAILY_USER_WORK_DATAを登録する
 
     Args:
@@ -95,6 +96,7 @@ def regist_daily_user_work_data(user: UserDataDto, year: str, month: str, day: s
         start_mi (str): 開始時間(分)
         end_hh (str): 終了時間(時)
         end_mi (str): 終了時間(分)
+        note (str): 備考
 
     Returns:
         bool: 登録処理成功の場合True、それ以外の場合False
@@ -122,6 +124,7 @@ def regist_daily_user_work_data(user: UserDataDto, year: str, month: str, day: s
         work_data.work_start_date = work_start_date
         work_data.work_end_date = work_end_date
         work_data.actual_work_date = actual_work_date
+        work_data.note = note
         work_data.save()
 
     else:
@@ -131,7 +134,8 @@ def regist_daily_user_work_data(user: UserDataDto, year: str, month: str, day: s
             division_cd=division_cd,
             work_start_date=work_start_date,
             work_end_date=work_end_date,
-            actual_work_date=actual_work_date)
+            actual_work_date=actual_work_date,
+            note=note)
 
         work_data.save()
 

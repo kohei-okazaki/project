@@ -75,6 +75,7 @@ class DailyworkDto():
     business_flg: bool = None
     work_start_date: datetime = None
     work_end_date: datetime = None
+    note: str = ""
 
 
 class BusinessCalendarMtDto():
