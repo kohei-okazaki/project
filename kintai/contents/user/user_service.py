@@ -30,10 +30,8 @@ def get_user_by_id_and_password(dto: UserDataDto) -> list:
 
     user_data_list: list = UserData.objects.filter(
         seq_user_id=dto.seq_user_id, password=dto.password)
-    dto_list: list = list()
 
-    for user_data in user_data_list:
-        dto_list.append(UserDataDto(user_data))
+    dto_list: list = list(UserDataDto(user_data) for user_data in user_data_list)
 
     return dto_list
 

@@ -123,5 +123,6 @@ class DailyUserWorkDataDto():
         self.actual_work_date = entity.actual_work_date
         self.approval_flg = entity.approval_flg
         self.cancel_flg = entity.cancel_flg
+        self.note = entity.note
         self.reg_date = entity.reg_date
         self.update_date = entity.update_date

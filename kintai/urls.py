@@ -21,5 +21,6 @@ urlpatterns = [
     path("", TopView.as_view(), name="index"),
     path("user/create/", UserCreateView.as_view(), name="user_create"),
     path("user/edit/", UserEditView.as_view(), name="user_edit"),
-    path("dailywork/create/", DailyworkCreateView.as_view(), name="dailywork_create"),
+    path("dailywork/create/", DailyworkCreateView.as_view(),
+         name="dailywork_create"),
 ]
