@@ -3,11 +3,27 @@
 {% block contents %}
 {% comment %} 画面ID：画面指定のjavascriptなどはこれを見る {% endcomment %}
 <div id="dailywork_create" class="container border p-5">
+
   <div class="row">
     <div class="col-12">
       <h3 class="text-center">日次勤怠登録</h3>
+    </div>
+  </div>
 
+  <div class="row">
+    <div class="col-12">
       <div class="space-20"></div>
+
+      {% if warn_message %}
+        <div class="space-10"></div>
+        <div class="alert alert-warning" role="alert">{{ warn_message }}</div>
+        <div class="space-10"></div>
+      {% endif %}
+      {% if error_message %}
+        <div class="space-10"></div>
+        <div class="alert alert-danger" role="alert">{{ error_message }}</div>
+        <div class="space-10"></div>
+      {% endif %}
 
       <form method="get" action="{% url 'dailywork_create' %}">
         <div class="dailywork-yyyymm-area">
@@ -24,9 +40,12 @@
           <input type="submit" class="btn btn-secondary" value="切替"></input>
         </div>
       </form>
+    </div>
+  </div>
 
-      <div class="space-20"></div>
-
+  <div class="space-20"></div>
+  <div class="row">
+    <div class="col-12">
       <table class="table table-hover">
         <thead>
           <tr class="table-info">
@@ -64,7 +83,7 @@
             <tr>
               <td>
                 <div class="weekday d-flex align-items-center justify-content-center">
-                  <input type="submit" class="btn btn-primary btn-sm" value="登 録" />
+                  <input type="submit" class="btn btn-primary btn-sm" value="登録" />
                 </div>
               </td>
               <td>
@@ -116,7 +135,7 @@
                   </select>
                 </div>
               <td>
-                <div class="d-flex align-items-center justify-content-center">：</div>
+                <div class="d-flex align-items-center justify-content-center">:</div>
               </td>
               <td>
                 <div class="d-flex align-items-center justify-content-center">
@@ -130,7 +149,7 @@
                 </div>
               </td>
               <td>
-                <div class="d-flex align-items-center justify-content-center">～</div>
+                <div class="d-flex align-items-center justify-content-center">~</div>
               </td>
               <td>
                 <div class="d-flex align-items-center justify-content-center">
@@ -164,7 +183,7 @@
                 </div>
               </td>
               <td>
-                <div class="d-flex align-items-center justify-content-center">：</div>
+                <div class="d-flex align-items-center justify-content-center">:</div>
               </td>
               <td>
                 <div class="d-flex align-items-center justify-content-center">
@@ -179,7 +198,7 @@
               </td>
               <td>
                 <div class="d-flex align-items-center justify-content-center">
-                  <input type="button" name="ontime" class="btn btn-secondary btn-sm" value="反 映" />
+                  <input type="button" name="ontime" class="btn btn-secondary btn-sm" value="反映" />
                 </div>
               </td>
               <td></td>
@@ -196,5 +215,6 @@
       </table>
     </div>
   </div>
+
 </div>
 {% endblock %}

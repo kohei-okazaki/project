@@ -3,6 +3,16 @@
 {% block contents %}
 <div class="container">
   <div class="space-50"></div>
+  {% if warn_message %}
+    <div class="space-10"></div>
+    <div class="alert alert-warning" role="alert">{{ warn_message }}</div>
+    <div class="space-10"></div>
+  {% endif %}
+  {% if error_message %}
+    <div class="space-10"></div>
+    <div class="alert alert-danger" role="alert">{{ error_message }}</div>
+    <div class="space-10"></div>
+  {% endif %}
   <div class="login-frame">
     <div class="space-40"></div>
     <form method="post" action="{% url 'login' %}">

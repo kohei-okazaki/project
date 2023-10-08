@@ -25,7 +25,8 @@ class LoginView(TemplateView):
 
     def __init__(self):
         self.params = {
-            "form": LoginForm()
+            "warn_message": None,
+            "error_message": None,
         }
 
     def get(self, request: HttpRequest) -> HttpResponse:
@@ -33,7 +34,7 @@ class LoginView(TemplateView):
         # セッション削除
         request.session.flush()
 
-        return render(request, "login/index.html", self.params)
+        return render(request, "login/index.html")
 
     def post(self, request: HttpRequest) -> HttpResponse:
 
@@ -47,7 +48,7 @@ class LoginView(TemplateView):
 
             if (len(dto_list) < 1):
                 params = {
-                    "errorMessage": "ユーザが存在しません"
+                    "warn_message": "ユーザが存在しません"
                 }
                 return render(request, "login/index.html", params)
 
@@ -90,6 +91,8 @@ class UserCreateView(TemplateView):
             "form": UserCreateForm(),
             "company_mt_list": [],
             "division_mt_list": [],
+            "warn_message": None,
+            "error_message": None,
         }
 
     def get(self, request: HttpRequest) -> HttpResponse:
@@ -113,7 +116,11 @@ class UserCreateView(TemplateView):
             dto.division_cd = form.cleaned_data["division_cd"]
             user_service.regist_user(dto)
 
-        return redirect(to="login")
+            return redirect(to="login")
+
+        else:
+            self.params["error_message"] = "登録に失敗しました"
+            return render(request, "user/create.html", self.params)
 
 
 class UserEditView(TemplateView):
@@ -128,7 +135,9 @@ class UserEditView(TemplateView):
 
     def __init__(self):
         self.params = {
-            "form": UserEditForm()
+            "form": UserEditForm(),
+            "warn_message": None,
+            "error_message": None,
         }
 
     def get(self, request: HttpRequest) -> HttpResponse:
@@ -167,7 +176,8 @@ class DailyworkCreateView(TemplateView):
             "dto_list": [],
             "yyyymm_list": [],
             "current_month": "",
-            "form": DailyworkCreateForm()
+            "warn_message": None,
+            "error_message": None,
         }
 
     def get(self, request: HttpRequest) -> HttpResponse:
@@ -199,10 +209,13 @@ class DailyworkCreateView(TemplateView):
 
         form: DailyworkCreateForm = DailyworkCreateForm(request.POST)
 
-        if (form.is_valid()):
+        if form.is_valid():
             user: UserDataDto = user_service.get_user_data_dto(
                 seq_user_id=request.session["seq_user_id"])
             dailywork_service.regist_daily_user_work_data(user=user, year=form.cleaned_data["year"], month=form.cleaned_data["month"], day=form.cleaned_data["day"], start_hh=form.cleaned_data[
                                                           "start_hh"], start_mi=form.cleaned_data["start_mi"], end_hh=form.cleaned_data["end_hh"], end_mi=form.cleaned_data["end_mi"], note=form.cleaned_data["note"])
-
-        return redirect(to="dailywork_create")
+            
+            return redirect(to="dailywork_create")
+        else:
+            self.params["error_message"] = "登録に失敗しました"
+            return render(request, "dailywork/create.html", self.params)
