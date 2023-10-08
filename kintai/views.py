@@ -1,7 +1,9 @@
 import datetime
 import logging
+from urllib.parse import urlencode
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.views.generic import TemplateView
 from kintai.contents.util.dto import UserDataDto
 from kintai.forms import DailyworkCreateForm, LoginForm, UserCreateForm, UserEditForm
@@ -25,6 +27,7 @@ class LoginView(TemplateView):
 
     def __init__(self):
         self.params = {
+            "success_message": None,
             "warn_message": None,
             "error_message": None,
         }
@@ -34,7 +37,10 @@ class LoginView(TemplateView):
         # セッション削除
         request.session.flush()
 
-        return render(request, "login/index.html")
+        if "is_success" in request.GET:
+            self.params["success_message"] = "登録完了しました"
+
+        return render(request, "login/index.html", self.params)
 
     def post(self, request: HttpRequest) -> HttpResponse:
 
@@ -91,6 +97,7 @@ class UserCreateView(TemplateView):
             "form": UserCreateForm(),
             "company_mt_list": [],
             "division_mt_list": [],
+            "success_message": None,
             "warn_message": None,
             "error_message": None,
         }
@@ -116,7 +123,10 @@ class UserCreateView(TemplateView):
             dto.division_cd = form.cleaned_data["division_cd"]
             user_service.regist_user(dto)
 
-            return redirect(to="login")
+            redirect_url = reverse("login")
+            parameters = urlencode({"is_success": True})
+            url = f"{redirect_url}?{parameters}"
+            return redirect(url)
 
         else:
             self.params["error_message"] = "登録に失敗しました"
@@ -136,6 +146,7 @@ class UserEditView(TemplateView):
     def __init__(self):
         self.params = {
             "form": UserEditForm(),
+            "success_message": None,
             "warn_message": None,
             "error_message": None,
         }
@@ -147,6 +158,9 @@ class UserEditView(TemplateView):
 
         self.params["form"] = current_user
 
+        if "is_success" in request.GET:
+            self.params["success_message"] = "登録完了しました"
+
         return render(request, "user/edit.html", self.params)
 
     def post(self, request: HttpRequest) -> HttpResponse:
@@ -157,6 +171,11 @@ class UserEditView(TemplateView):
                 request.session["seq_user_id"])
             current_user.password = form.cleaned_data["password"]
             user_service.update_user(current_user)
+
+            redirect_url = reverse("user_edit")
+            parameters = urlencode({"is_success": True})
+            url = f"{redirect_url}?{parameters}"
+            return redirect(url)
 
         return redirect(to="user_edit")
 
@@ -176,6 +195,7 @@ class DailyworkCreateView(TemplateView):
             "dto_list": [],
             "yyyymm_list": [],
             "current_month": "",
+            "success_message": None,
             "warn_message": None,
             "error_message": None,
         }
@@ -203,6 +223,9 @@ class DailyworkCreateView(TemplateView):
         self.params["dto_list"] = dailywork_service.get_daily_user_work_dto_list(
             user=user, yyyymm=yyyymm)
 
+        if "is_success" in request.GET:
+            self.params["success_message"] = "登録完了しました"
+
         return render(request, "dailywork/create.html", self.params)
 
     def post(self, request: HttpRequest) -> HttpResponse:
@@ -214,8 +237,12 @@ class DailyworkCreateView(TemplateView):
                 seq_user_id=request.session["seq_user_id"])
             dailywork_service.regist_daily_user_work_data(user=user, year=form.cleaned_data["year"], month=form.cleaned_data["month"], day=form.cleaned_data["day"], start_hh=form.cleaned_data[
                                                           "start_hh"], start_mi=form.cleaned_data["start_mi"], end_hh=form.cleaned_data["end_hh"], end_mi=form.cleaned_data["end_mi"], note=form.cleaned_data["note"])
-            
-            return redirect(to="dailywork_create")
+
+            redirect_url = reverse("dailywork_create")
+            parameters = urlencode({"is_success": True})
+            url = f"{redirect_url}?{parameters}"
+            return redirect(url)
+
         else:
             self.params["error_message"] = "登録に失敗しました"
             return render(request, "dailywork/create.html", self.params)

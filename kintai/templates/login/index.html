@@ -3,6 +3,11 @@
 {% block contents %}
 <div class="container">
   <div class="space-50"></div>
+  {% if success_message %}
+    <div class="space-10"></div>
+    <div class="alert alert-primary" role="alert">{{ success_message }}</div>
+    <div class="space-10"></div>
+  {% endif %}
   {% if warn_message %}
     <div class="space-10"></div>
     <div class="alert alert-warning" role="alert">{{ warn_message }}</div>

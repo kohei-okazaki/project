@@ -10,6 +10,26 @@
 
   <div class="row">
     <div class="col-12">
+      {% if success_message %}
+        <div class="space-10"></div>
+        <div class="alert alert-primary" role="alert">{{ success_message }}</div>
+        <div class="space-10"></div>
+      {% endif %}
+      {% if warn_message %}
+        <div class="space-10"></div>
+        <div class="alert alert-warning" role="alert">{{ warn_message }}</div>
+        <div class="space-10"></div>
+      {% endif %}
+      {% if error_message %}
+        <div class="space-10"></div>
+        <div class="alert alert-danger" role="alert">{{ error_message }}</div>
+        <div class="space-10"></div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
       <form action="{% url 'user_edit' %}" method="post">
         {% csrf_token %}
         <div class="row mb-3">
