@@ -32,7 +32,7 @@
 
       <form method="get" action="{% url 'dailywork_create' %}">
         <div class="dailywork-yyyymm-area">
-          <select class="form-select" name="yyyymm" style="width: 110px;">
+          <select id="yyyymm" class="form-select" name="yyyymm" style="width: 110px;">
             {% for yyyymm in yyyymm_list %}
               {% if yyyymm == current_month %}
                 <option selected>{{ yyyymm }}</option>
@@ -93,6 +93,7 @@
               </td>
               <td>
                 <div class="d-flex align-items-center justify-content-center">{{ dto.date|date:"m/d" }}</div>
+                <input id="hidden-yyyymm" type="hidden" name="yyyymm" value={{ current_month }} />
                 <input type="hidden" name="year" value={{ dto.date|date:"Y" }} />
                 <input type="hidden" name="month" value={{ dto.date|date:"n" }} />
                 <input type="hidden" name="day" value={{ dto.date|date:"j" }} />

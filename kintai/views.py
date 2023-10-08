@@ -52,7 +52,7 @@ class LoginView(TemplateView):
             dto.password = loginForm.cleaned_data["password"]
             dto_list = user_service.get_user_by_id_and_password(dto)
 
-            if (len(dto_list) < 1):
+            if len(dto_list) < 1:
                 params = {
                     "warn_message": "ユーザが存在しません"
                 }
@@ -116,7 +116,7 @@ class UserCreateView(TemplateView):
     def post(self, request: HttpRequest) -> HttpResponse:
 
         form: UserCreateForm = UserCreateForm(request.POST)
-        if (form.is_valid()):
+        if form.is_valid():
             dto: UserDataDto = UserDataDto()
             dto.password = form.cleaned_data["password"]
             dto.company_cd = form.cleaned_data["company_cd"]
@@ -245,4 +245,18 @@ class DailyworkCreateView(TemplateView):
 
         else:
             self.params["error_message"] = "登録に失敗しました"
+
+            sysdate: datetime = date_util.get_sysdate()
+            self.params["yyyymm_list"].append(
+                date_util.to_str(sysdate, date_util.FORMAT_YYYYMM))
+            self.params["yyyymm_list"].append(date_util.to_str(
+                date_util.get_any_month(sysdate, -1), date_util.FORMAT_YYYYMM))
+            self.params["yyyymm_list"].append(date_util.to_str(
+                date_util.get_any_month(sysdate, -2), date_util.FORMAT_YYYYMM))
+            self.params["current_month"] = request.POST["yyyymm"]
+            user: UserDataDto = user_service.get_user_data_dto(
+                seq_user_id=request.session["seq_user_id"])
+            self.params["dto_list"] = dailywork_service.get_daily_user_work_dto_list(
+                user=user, yyyymm=self.params["current_month"])
+
             return render(request, "dailywork/create.html", self.params)

@@ -22,3 +22,8 @@ $(window).on("load", function () {
     $("div.contents-submenu").css("height", "260%");
   }
 });
+
+function onSubmit() {
+  var yyyymm = $("#yyyymm").val();
+  $("#hidden-yyyymm").val(yyyymm);
+}
