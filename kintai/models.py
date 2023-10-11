@@ -24,6 +24,29 @@ class UserData(Model):
     class Meta:
         db_table = "USER_DATA"
 
+class UserDataHist(Model):
+    seq_user_data_hist_id = models.BigAutoField(db_column="SEQ_USER_DATA_HIST_ID", primary_key=True, null=False, help_text='ユーザID情報履歴ID')
+    seq_user_id = models.BigIntegerField(db_column="SEQ_USER_ID", null=False, help_text='ユーザID')
+    password = models.CharField(db_column="PASSWORD", max_length=64, null=False, help_text='パスワード')
+    company_cd = models.CharField(db_column="COMPANY_CD", max_length=5, null=False, help_text='企業コード')
+    division_cd = models.CharField(db_column="DIVISION_CD", default="", max_length=5, null=False, help_text='部署コード')
+    del_flg = models.BooleanField(db_column="DEL_FLG", default=False, max_length=5, null=False, help_text='削除フラグ')
+    reg_date = models.DateTimeField(db_column="REG_DATE", auto_now_add=True, null=False, help_text='登録日時')
+    update_date = models.DateTimeField(db_column="UPDATE_DATE", auto_now=True, null=False, help_text='更新日時')
+
+    def __str__(self):
+        return "USER_DATA_HIST=>"\
+            "SEQ_USER_DATA_HIST_ID=" + str(self.seq_user_data_hist_id) + \
+            ",SEQ_USER_ID=" + str(self.seq_user_id) + \
+            ",PASSWORD=" + str(self.password) + \
+            ",COMPANY_CD=" + str(self.company_cd) + \
+            ",DIVISION_CD=" + str(self.division_cd) + \
+            ",DEL_FLG=" + str(self.del_flg) + \
+            ",REG_DATE=" + self.reg_date.strftime('%Y/%m/%d %H:%M:%S') + \
+            ",UPDATE_DATE=" + self.update_date.strftime('%Y/%m/%d %H:%M:%S')
+
+    class Meta:
+        db_table = "USER_DATA_HIST"
 
 class DailyUserWorkData(Model):
     seq_daily_user_work_data_id = models.BigAutoField(db_column="SEQ_DAILY_USER_WORK_DATA_ID", primary_key=True, null=False, help_text='日別ユーザ勤怠情報ID')
