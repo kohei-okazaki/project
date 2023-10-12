@@ -71,7 +71,7 @@
             </th>
             <th><div class="d-flex align-items-center justify-content-center">定時</div></th>
             <th>
-                <div class="d-flex align-items-center justify-content-center">労働時間(h)</div>
+              <div class="d-flex align-items-center justify-content-center">労働時間(h)</div>
             </th>
             <th>
               <div class="d-flex align-items-center justify-content-center">残業時間(h)</div>
@@ -207,7 +207,13 @@
                   <input type="button" name="ontime" class="btn btn-secondary btn-sm" value="反映" />
                 </div>
               </td>
-              <td></td>
+              <td>
+                <div class="d-flex align-items-center justify-content-center">
+                  {% if dto.actual_work_date != None %}
+                    {{ dto.actual_work_date }}
+                  {% endif %}
+                </div>
+              </td>
               <td></td>
               <td>
                 <div class="d-flex align-items-center justify-content-center">

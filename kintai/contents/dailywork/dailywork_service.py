@@ -39,6 +39,7 @@ def get_daily_user_work_dto_list(user: UserDataDto, yyyymm: str) -> list:
                 # 登録がある場合
                 dto.work_start_date = user_work.work_start_date
                 dto.work_end_date = user_work.work_end_date
+                dto.actual_work_date = user_work.actual_work_date
                 dto.note = user_work.note
 
         dto_list.append(dto)
@@ -118,7 +119,7 @@ def regist_daily_user_work_data(user: UserDataDto, year: str, month: str, day: s
     daily_user_work_data_list = DailyUserWorkData.objects.filter(
         seq_user_id=user.seq_user_id, work_start_date__range=[from_date, to_date]).order_by("work_start_date")
 
-    if (daily_user_work_data_list.count() > 0):
+    if daily_user_work_data_list.count() > 0:
         # 既に勤怠情報が登録されている場合
         work_data: DailyUserWorkData = daily_user_work_data_list.first()
         work_data.work_start_date = work_start_date
