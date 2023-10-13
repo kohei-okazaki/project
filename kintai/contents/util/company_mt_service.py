@@ -2,7 +2,7 @@ from kintai.contents.util.dto import CompanyMtDto
 from kintai.models import CompanyMt
 
 
-def get_company_mt_dto_list(orderby: str) -> list:
+def get_dto_list(orderby: str) -> list:
     """企業マスタDtoのリストを返す
 
     Args:

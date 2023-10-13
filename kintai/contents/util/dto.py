@@ -1,4 +1,4 @@
-from kintai.models import BusinessCalendarMt, CompanyMt, DailyUserWorkData, DivisionMt, UserData
+from kintai.models import BusinessCalendarMt, CompanyMt, DailyUserWorkData, DivisionMt, OntimeMt, UserData
 import datetime
 
 
@@ -126,5 +126,31 @@ class DailyUserWorkDataDto():
         self.approval_flg = entity.approval_flg
         self.cancel_flg = entity.cancel_flg
         self.note = entity.note
+        self.reg_date = entity.reg_date
+        self.update_date = entity.update_date
+
+
+class OntimeMtDto():
+    """定時マスタDto
+    """
+
+    def __init__(self, entity: OntimeMt = None):
+        """コンストラクタ
+
+        Args:
+            entity (OntimeMt, optional): 定時マスタ. Defaults to None.
+        """
+
+        if entity is None:
+            return
+
+        self.seq_ontime_mt_id = entity.seq_ontime_mt_id
+        self.company_cd = entity.company_cd
+        self.division_cd = entity.division_cd
+        self.start_hour = entity.start_hour
+        self.start_minute = entity.start_minute
+        self.end_hour = entity.end_hour
+        self.end_minute = entity.end_minute
+        self.del_flg = entity.del_flg
         self.reg_date = entity.reg_date
         self.update_date = entity.update_date

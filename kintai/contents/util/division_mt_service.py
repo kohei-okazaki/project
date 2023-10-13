@@ -2,7 +2,7 @@ from kintai.contents.util.dto import DivisionMtDto
 from kintai.models import DivisionMt
 
 
-def get_division_mt_dto_list(orderby: str) -> list:
+def get_dto_list(orderby: str) -> list:
     """部署マスタDtoのリストを返す
 
     Args:
