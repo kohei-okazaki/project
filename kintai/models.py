@@ -83,7 +83,7 @@ class DailyUserWorkData(Model):
 
 
 class OntimeMt(Model):
-    seq_ontime_mt_id = models.BigAutoField(db_column="SEQ_ONTIME_MT_ID", primary_key=True, null=False, help_text="日別ユーザ勤怠情報ID")
+    seq_ontime_mt_id = models.BigAutoField(db_column="SEQ_ONTIME_MT_ID", primary_key=True, null=False, help_text="定時マスタID")
     company_cd = models.CharField(db_column="COMPANY_CD", default="", max_length=5, null=False, help_text="企業コード")
     division_cd = models.CharField(db_column="DIVISION_CD", default="", max_length=5, null=False, help_text="部署コード")
     start_hour = models.CharField(db_column="START_HOUR", max_length=4, null=False, help_text="始業時間(時)")
