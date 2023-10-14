@@ -17,13 +17,13 @@ class UserDataDto():
         if entity is None:
             return
 
-        self.seq_user_id = entity.seq_user_id
-        self.password = entity.password
-        self.company_cd = entity.company_cd
-        self.division_cd = entity.division_cd
-        self.del_flg = entity.del_flg
-        self.reg_date = entity.reg_date
-        self.update_date = entity.update_date
+        self.seq_user_id: decimal = entity.seq_user_id
+        self.password: str = entity.password
+        self.company_cd: str = entity.company_cd
+        self.division_cd: str = entity.division_cd
+        self.del_flg: bool = entity.del_flg
+        self.reg_date: datetime = entity.reg_date
+        self.update_date: datetime = entity.update_date
 
 
 class CompanyMtDto():
@@ -40,11 +40,11 @@ class CompanyMtDto():
         if entity is None:
             return
 
-        self.company_cd = entity.company_cd
-        self.name = entity.name
-        self.del_flg = entity.del_flg
-        self.reg_date = entity.reg_date
-        self.update_date = entity.update_date
+        self.company_cd: str = entity.company_cd
+        self.name: str = entity.name
+        self.del_flg: bool = entity.del_flg
+        self.reg_date: datetime = entity.reg_date
+        self.update_date: datetime = entity.update_date
 
 
 class DivisionMtDto():
@@ -61,11 +61,11 @@ class DivisionMtDto():
         if entity is None:
             return
 
-        self.division_cd = entity.division_cd
-        self.name = entity.name
-        self.del_flg = entity.del_flg
-        self.reg_date = entity.reg_date
-        self.update_date = entity.update_date
+        self.division_cd: str = entity.division_cd
+        self.name: str = entity.name
+        self.del_flg: bool = entity.del_flg
+        self.reg_date: datetime = entity.reg_date
+        self.update_date: datetime = entity.update_date
 
 
 class DailyworkDto():
@@ -95,12 +95,12 @@ class BusinessCalendarMtDto():
         if entity is None:
             return
 
-        self.seq_business_calendar_mt_id = entity.seq_business_calendar_mt_id
-        self.date = entity.date
-        self.weekday = entity.weekday
-        self.business_flg = entity.business_flg
-        self.reg_date = entity.reg_date
-        self.update_date = entity.update_date
+        self.seq_business_calendar_mt_id: decimal = entity.seq_business_calendar_mt_id
+        self.date: datetime.date = entity.date
+        self.weekday: str = entity.weekday
+        self.business_flg: bool = entity.business_flg
+        self.reg_date: datetime = entity.reg_date
+        self.update_date: datetime = entity.update_date
 
 
 class DailyUserWorkDataDto():
@@ -147,13 +147,13 @@ class OntimeMtDto():
         if entity is None:
             return
 
-        self.seq_ontime_mt_id = entity.seq_ontime_mt_id
-        self.company_cd = entity.company_cd
-        self.division_cd = entity.division_cd
-        self.start_hour = entity.start_hour
-        self.start_minute = entity.start_minute
-        self.end_hour = entity.end_hour
-        self.end_minute = entity.end_minute
-        self.del_flg = entity.del_flg
-        self.reg_date = entity.reg_date
-        self.update_date = entity.update_date
+        self.seq_ontime_mt_id: decimal = entity.seq_ontime_mt_id
+        self.company_cd: str = entity.company_cd
+        self.division_cd: str = entity.division_cd
+        self.start_hour: str = entity.start_hour
+        self.start_minute: str = entity.start_minute
+        self.end_hour: str = entity.end_hour
+        self.end_minute: str = entity.end_minute
+        self.del_flg: bool = entity.del_flg
+        self.reg_date: datetime = entity.reg_date
+        self.update_date: datetime = entity.update_date
