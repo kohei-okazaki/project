@@ -5,7 +5,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views.generic import TemplateView
-from kintai.contents.util.dto import UserDataDto
+from kintai.contents.util.dto import DailyUserWorkDataDto, UserDataDto
 from kintai.forms import DailyworkCreateForm, LoginForm, UserCreateForm, UserEditForm
 from kintai.contents.util import date_util, company_mt_service, division_mt_service
 from kintai.contents.dailywork import dailywork_service
@@ -234,8 +234,7 @@ class DailyworkCreateView(TemplateView):
         if form.is_valid():
             user: UserDataDto = user_service.get_user_data_dto(
                 seq_user_id=request.session["seq_user_id"])
-            dailywork_service.regist_daily_user_work_data(user=user, year=form.cleaned_data["year"], month=form.cleaned_data["month"], day=form.cleaned_data["day"], start_hh=form.cleaned_data[
-                                                          "start_hh"], start_mi=form.cleaned_data["start_mi"], end_hh=form.cleaned_data["end_hh"], end_mi=form.cleaned_data["end_mi"], rest_time=form.cleaned_data["rest_time"], note=form.cleaned_data["note"])
+            dailywork_service.regist_daily_user_work_data(user, form)
 
             redirect_url = reverse("dailywork_create")
             parameters = urlencode({"is_success": True})

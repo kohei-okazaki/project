@@ -78,6 +78,7 @@ class DailyworkDto:
     work_end_date: datetime = None
     actual_work_date: datetime = None
     rest_time: decimal = None
+    over_time: decimal = None
     note: str = ""
 
 
@@ -126,6 +127,7 @@ class DailyUserWorkDataDto:
         self.work_end_date: datetime = entity.work_end_date
         self.actual_work_date: decimal = entity.actual_work_date
         self.rest_time: decimal = entity.rest_time
+        self.over_time: decimal = entity.over_time
         self.approval_flg: bool = entity.approval_flg
         self.cancel_flg: bool = entity.cancel_flg
         self.note: str = entity.note
