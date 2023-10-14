@@ -5,7 +5,25 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Python Django",
+      "name": "Make Migrate",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}\\manage.py",
+      "args": ["makemigrations", "kintai"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Migrate",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}\\manage.py",
+      "args": ["migrate"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Django Server Start",
       "type": "python",
       "request": "launch",
       "program": "${workspaceFolder}\\manage.py",
