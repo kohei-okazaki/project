@@ -1,5 +1,6 @@
 import datetime
 import decimal
+from decimal import Decimal
 from kintai.contents.util import date_util
 from kintai.contents.util.dto import BusinessCalendarMtDto, DailyUserWorkDataDto, DailyworkDto, UserDataDto
 from kintai.models import BusinessCalendarMt, DailyUserWorkData
@@ -40,6 +41,7 @@ def get_daily_user_work_dto_list(user: UserDataDto, yyyymm: str) -> list:
                 dto.work_start_date = user_work.work_start_date
                 dto.work_end_date = user_work.work_end_date
                 dto.actual_work_date = user_work.actual_work_date
+                dto.rest_time = user_work.rest_time
                 dto.note = user_work.note
 
         dto_list.append(dto)
@@ -85,7 +87,7 @@ def get_daily_user_work_data_dto_list(user: UserDataDto, from_date: datetime, to
     return dto_list
 
 
-def regist_daily_user_work_data(user: UserDataDto, year: str, month: str, day: str, start_hh: str, start_mi: str, end_hh: str, end_mi: str, note: str) -> bool:
+def regist_daily_user_work_data(user: UserDataDto, year: str, month: str, day: str, start_hh: str, start_mi: str, end_hh: str, end_mi: str, rest_time: str, note: str) -> bool:
     """DAILY_USER_WORK_DATAを登録する
 
     Args:
@@ -97,6 +99,7 @@ def regist_daily_user_work_data(user: UserDataDto, year: str, month: str, day: s
         start_mi (str): 開始時間(分)
         end_hh (str): 終了時間(時)
         end_mi (str): 終了時間(分)
+        rest_time (str): 休憩時間
         note (str): 備考
 
     Returns:
@@ -110,8 +113,9 @@ def regist_daily_user_work_data(user: UserDataDto, year: str, month: str, day: s
         int(year), int(month), int(day), int(start_hh), int(start_mi), 00)
     work_end_date: datetime = datetime.datetime(
         int(year), int(month), int(day), int(end_hh), int(end_mi), 00)
+    rest_time: decimal = Decimal(rest_time)
     actual_work_date: decimal = get_actual_work_date(
-        start_hh, start_mi, end_hh, end_mi)
+        start_hh, start_mi, end_hh, end_mi, rest_time)
 
     # 日別ユーザ勤怠情報を検索
     from_date: datetime = datetime.datetime(int(year), int(month), int(day))
@@ -125,6 +129,7 @@ def regist_daily_user_work_data(user: UserDataDto, year: str, month: str, day: s
         work_data.work_start_date = work_start_date
         work_data.work_end_date = work_end_date
         work_data.actual_work_date = actual_work_date
+        work_data.rest_time = rest_time
         work_data.note = note
         work_data.save()
 
@@ -136,6 +141,7 @@ def regist_daily_user_work_data(user: UserDataDto, year: str, month: str, day: s
             work_start_date=work_start_date,
             work_end_date=work_end_date,
             actual_work_date=actual_work_date,
+            rest_time = rest_time,
             note=note)
 
         work_data.save()
@@ -143,7 +149,7 @@ def regist_daily_user_work_data(user: UserDataDto, year: str, month: str, day: s
     return True
 
 
-def get_actual_work_date(start_hh: str, start_mi: str, end_hh: str, end_mi: str) -> decimal:
+def get_actual_work_date(start_hh: str, start_mi: str, end_hh: str, end_mi: str, rest_time: decimal) -> decimal:
     """実労働時間を取得
 
     Args:
@@ -151,6 +157,7 @@ def get_actual_work_date(start_hh: str, start_mi: str, end_hh: str, end_mi: str)
         start_mi (str): 開始時間(分)
         end_hh (str): 終了時間(時)
         end_mi (str): 終了時間(分)
+        rest_time (decimal): 休憩時間
 
     Returns:
         decimal: 実労働時間(n.n)形式
@@ -160,4 +167,4 @@ def get_actual_work_date(start_hh: str, start_mi: str, end_hh: str, end_mi: str)
         start_hh + ":" + start_mi + ":00", date_util.FORMAT_HHMISS_SEP)
     end: datetime = date_util.to_date(
         end_hh + ":" + end_mi + ":00", date_util.FORMAT_HHMISS_SEP)
-    return (end - start).seconds / 60 / 60
+    return Decimal(str((end - start).seconds / 60 / 60)) - rest_time

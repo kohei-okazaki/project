@@ -56,7 +56,8 @@ class DailyUserWorkData(Model):
     work_data_reg_date = models.DateTimeField(db_column="WORK_DATA_REG_DATE", auto_now_add=True, null=False, help_text="勤怠情報登録日時")
     work_start_date = models.DateTimeField(db_column="WORK_START_DATE", null=False, help_text="始業時刻")
     work_end_date = models.DateTimeField(db_column="WORK_END_DATE", null=False, help_text="終業時刻")
-    actual_work_date = models.CharField(db_column="ACTUAL_WORK_TIME", max_length=4, null=False, help_text="実労働時間")
+    actual_work_date = models.DecimalField(db_column="ACTUAL_WORK_TIME", max_digits=4, decimal_places=2, null=False, help_text="実労働時間")
+    rest_time = models.DecimalField(db_column="REST_TIME", max_digits=4, decimal_places=2, default=0.00, null=False, help_text="休憩時間")
     approval_flg = models.BooleanField(db_column="APPROVAL_FLG", default=False, null=False, help_text="承認フラグ")
     cancel_flg = models.BooleanField(db_column="CANCEL_FLG", default=False, null=False, help_text="取消申請フラグ")
     note = models.CharField(db_column="NOTE", null=True, max_length=128, help_text="備考")
@@ -73,8 +74,10 @@ class DailyUserWorkData(Model):
             ",WORK_START_DATE=" + str(self.work_start_date) + \
             ",WORK_END_DATE=" + str(self.work_end_date) + \
             ",ACTUAL_WORK_TIME=" + str(self.actual_work_date) + \
+            ",REST_TIME=" + str(self.rest_time) + \
             ",APPROVAL_FLG=" + str(self.approval_flg) + \
             ",CANCEL_FLG=" + str(self.cancel_flg) + \
+            ",NOTE=" + str(self.note) + \
             ",REG_DATE=" + self.reg_date.strftime("%Y/%m/%d %H:%M:%S") + \
             ",UPDATE_DATE=" + self.update_date.strftime("%Y/%m/%d %H:%M:%S")
 

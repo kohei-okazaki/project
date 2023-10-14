@@ -58,5 +58,7 @@ class DailyworkCreateForm(forms.Form):
     end_hh = forms.CharField(required=True, label="作業終了(時)")
     # 作業終了(分)
     end_mi = forms.CharField(required=True, label="作業終了(分)")
+    # 休憩時間
+    rest_time = forms.CharField(required=True, label="休憩時間")
     # 備考
     note = forms.CharField(required=False, label="備考")

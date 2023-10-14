@@ -69,6 +69,7 @@
             <th colspan="3">
               <div class="d-flex align-items-center justify-content-center">終業時刻</div>
             </th>
+            <th><div class="d-flex align-items-center justify-content-center">休憩時間</div></th>
             <th><div class="d-flex align-items-center justify-content-center">定時</div></th>
             <th>
               <div class="d-flex align-items-center justify-content-center">労働時間(h)</div>
@@ -141,7 +142,7 @@
                   </select>
                 </div>
               <td>
-                <div class="d-flex align-items-center justify-content-center">:</div>
+                <div class="d-flex align-items-center justify-content-center" style="width: 2px;">:</div>
               </td>
               <td>
                 <div class="d-flex align-items-center justify-content-center">
@@ -155,7 +156,7 @@
                 </div>
               </td>
               <td>
-                <div class="d-flex align-items-center justify-content-center">~</div>
+                <div class="d-flex align-items-center justify-content-center" style="width: 2px;">~</div>
               </td>
               <td>
                 <div class="d-flex align-items-center justify-content-center">
@@ -189,7 +190,7 @@
                 </div>
               </td>
               <td>
-                <div class="d-flex align-items-center justify-content-center">:</div>
+                <div class="d-flex align-items-center justify-content-center" style="width: 2px;">:</div>
               </td>
               <td>
                 <div class="d-flex align-items-center justify-content-center">
@@ -200,6 +201,15 @@
                     <option>30</option>
                     <option>45</option>
                   </select>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex align-items-center justify-content-center" style="width: 80px;">
+                  {% if dto.rest_time == None %}
+                    <input class="form-control bg-light placeholder" name="rest_time" placeholder="1.00" />
+                  {% else %}
+                    <input class="form-control bg-light placeholder" name="rest_time" placeholder="1.00" value={{ dto.rest_time }} />
+                  {% endif %}
                 </div>
               </td>
               <td>

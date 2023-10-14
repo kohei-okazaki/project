@@ -1,3 +1,4 @@
+import decimal
 from kintai.models import BusinessCalendarMt, CompanyMt, DailyUserWorkData, DivisionMt, OntimeMt, UserData
 import datetime
 
@@ -76,6 +77,7 @@ class DailyworkDto():
     work_start_date: datetime = None
     work_end_date: datetime = None
     actual_work_date: datetime = None
+    rest_time: decimal = None
     note: str = ""
 
 
@@ -115,19 +117,20 @@ class DailyUserWorkDataDto():
         if entity is None:
             return
 
-        self.seq_daily_user_work_data_id = entity.seq_daily_user_work_data_id
-        self.seq_user_id = entity.seq_user_id
-        self.company_cd = entity.company_cd
-        self.division_cd = entity.division_cd
-        self.work_data_reg_date = entity.work_data_reg_date
-        self.work_start_date = entity.work_start_date
-        self.work_end_date = entity.work_end_date
-        self.actual_work_date = entity.actual_work_date
-        self.approval_flg = entity.approval_flg
-        self.cancel_flg = entity.cancel_flg
-        self.note = entity.note
-        self.reg_date = entity.reg_date
-        self.update_date = entity.update_date
+        self.seq_daily_user_work_data_id: decimal = entity.seq_daily_user_work_data_id
+        self.seq_user_id: decimal = entity.seq_user_id
+        self.company_cd: str = entity.company_cd
+        self.division_cd: str = entity.division_cd
+        self.work_data_reg_date: datetime = entity.work_data_reg_date
+        self.work_start_date: datetime = entity.work_start_date
+        self.work_end_date: datetime = entity.work_end_date
+        self.actual_work_date: decimal = entity.actual_work_date
+        self.rest_time: decimal = entity.rest_time
+        self.approval_flg: bool = entity.approval_flg
+        self.cancel_flg: bool = entity.cancel_flg
+        self.note: str = entity.note
+        self.reg_date: datetime = entity.reg_date
+        self.update_date: datetime = entity.update_date
 
 
 class OntimeMtDto():

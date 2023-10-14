@@ -236,7 +236,7 @@ class DailyworkCreateView(TemplateView):
             user: UserDataDto = user_service.get_user_data_dto(
                 seq_user_id=request.session["seq_user_id"])
             dailywork_service.regist_daily_user_work_data(user=user, year=form.cleaned_data["year"], month=form.cleaned_data["month"], day=form.cleaned_data["day"], start_hh=form.cleaned_data[
-                                                          "start_hh"], start_mi=form.cleaned_data["start_mi"], end_hh=form.cleaned_data["end_hh"], end_mi=form.cleaned_data["end_mi"], note=form.cleaned_data["note"])
+                                                          "start_hh"], start_mi=form.cleaned_data["start_mi"], end_hh=form.cleaned_data["end_hh"], end_mi=form.cleaned_data["end_mi"], rest_time=form.cleaned_data["rest_time"], note=form.cleaned_data["note"])
 
             redirect_url = reverse("dailywork_create")
             parameters = urlencode({"is_success": True})
