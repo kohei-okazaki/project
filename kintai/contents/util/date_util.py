@@ -33,43 +33,43 @@ def to_str(dt: datetime, format: str) -> str:
     Returns:
         str: 変換後の文字列形式
     """
-    if (dt is None):
+    if dt is None:
         logger.warn("引数が未指定. dt=None")
         return None
     return dt.strftime(format)
 
 
-def to_date(str: str, format: str) -> datetime:
+def to_date(s: str, format: str) -> datetime:
     """
     文字列 => datetime
 
     Args:
-        str (str): 変換前の文字列形式の日付
+        s (str): 変換前の文字列形式の日付
         format (str): 変換フォーマット
 
     Returns:
         datetime: 変換後のdatetime
     """
-    if (str is None):
+    if s is None:
         logger.warn("引数が未指定. str=None")
         return None
-    return datetime.datetime.strptime(str, format)
+    return datetime.datetime.strptime(s, format)
 
 
-def get_str_yyyymm(str: str) -> str:
+def get_str_yyyymm(s: str) -> str:
     """
     引数が未指定の場合、システム日付を返す
 
     Args:
-        str (str): 文字列形式の日付
+        s (str): 文字列形式の日付
 
     Returns:
         str: 文字列形式の日付
     """
-    if (str is None):
+    if s is None:
         logger.warn("引数が未指定. str=None")
         return to_str(datetime.datetime.now().date(), FORMAT_YYYYMM)
-    return str
+    return s
 
 
 def get_any_month(dt: datetime, month: int) -> datetime:
@@ -85,19 +85,19 @@ def get_any_month(dt: datetime, month: int) -> datetime:
     return dt + relativedelta(months=month)
 
 
-def get_first_date_str(str: str) -> datetime:
+def get_first_date_str(s: str) -> datetime:
     """yyyymm形式の年月の月初のdatetimeを返す
 
     Args:
-        str (str): 対象年月
+        s (str): 対象年月
 
     Returns:
         datetime: 月初のdatetime
     """
-    return to_date(str + "01", FORMAT_YYYYMMDD)
+    return to_date(s + "01", FORMAT_YYYYMMDD)
 
 
-def getFirstDate(dt: datetime) -> datetime:
+def get_first_date(dt: datetime) -> datetime:
     """datetime形式の年月の月初のdatetimeを返す
 
     Args:
@@ -109,16 +109,16 @@ def getFirstDate(dt: datetime) -> datetime:
     return dt.replace(day=1)
 
 
-def get_last_date_str(str: str) -> datetime:
+def get_last_date_str(s: str) -> datetime:
     """yyyymm形式の年月の月末のdatetimeを返す
 
     Args:
-        str (str): 対象年月
+        s (str): 対象年月
 
     Returns:
         datetime: 月末のdatetime
     """
-    dt: datetime = to_date(str + "01", FORMAT_YYYYMMDD)
+    dt: datetime = to_date(s + "01", FORMAT_YYYYMMDD)
     return get_last_date(dt)
 
 
@@ -126,7 +126,7 @@ def get_last_date(dt: datetime) -> datetime:
     """datetime形式の年月の月末のdatetimeを返す
 
     Args:
-        str (str): 対象年月
+        dt:
 
     Returns:
         datetime: 月末のdatetime

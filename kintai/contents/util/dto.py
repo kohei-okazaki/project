@@ -3,7 +3,7 @@ from kintai.models import BusinessCalendarMt, CompanyMt, DailyUserWorkData, Divi
 import datetime
 
 
-class UserDataDto():
+class UserDataDto:
     """ユーザ情報Dto
     """
 
@@ -26,7 +26,7 @@ class UserDataDto():
         self.update_date: datetime = entity.update_date
 
 
-class CompanyMtDto():
+class CompanyMtDto:
     """企業マスタDto
     """
 
@@ -47,7 +47,7 @@ class CompanyMtDto():
         self.update_date: datetime = entity.update_date
 
 
-class DivisionMtDto():
+class DivisionMtDto:
     """部署マスタDto
     """
 
@@ -68,7 +68,7 @@ class DivisionMtDto():
         self.update_date: datetime = entity.update_date
 
 
-class DailyworkDto():
+class DailyworkDto:
     """日次勤怠登録画面で表示する情報保持クラス
     """
     date: datetime = None
@@ -81,7 +81,7 @@ class DailyworkDto():
     note: str = ""
 
 
-class BusinessCalendarMtDto():
+class BusinessCalendarMtDto:
     """営業日マスタDto
     """
 
@@ -103,7 +103,7 @@ class BusinessCalendarMtDto():
         self.update_date: datetime = entity.update_date
 
 
-class DailyUserWorkDataDto():
+class DailyUserWorkDataDto:
     """日別ユーザ勤怠情報Dto
     """
 
@@ -133,7 +133,7 @@ class DailyUserWorkDataDto():
         self.update_date: datetime = entity.update_date
 
 
-class OntimeMtDto():
+class OntimeMtDto:
     """定時マスタDto
     """
 

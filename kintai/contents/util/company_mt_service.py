@@ -13,7 +13,7 @@ def get_dto_list(orderby: str) -> list:
     """
 
     mt_list: list = list()
-    if (orderby == None or orderby == ""):
+    if orderby is None or orderby == "":
         mt_list = CompanyMt.objects.filter(
             del_flg=False)
     else:

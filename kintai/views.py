@@ -105,8 +105,7 @@ class UserCreateView(TemplateView):
     def get(self, request: HttpRequest) -> HttpResponse:
 
         # 企業マスタリストを取得
-        self.params["company_mt_list"] = company_mt_service.get_dto_list(
-            "company_cd")
+        self.params["company_mt_list"] = company_mt_service.get_dto_list("company_cd")
         # 部署マスタリストを取得
         self.params["division_mt_list"] = division_mt_service.get_dto_list(
             "division_cd")
