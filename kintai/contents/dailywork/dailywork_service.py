@@ -94,15 +94,7 @@ def regist_daily_user_work_data(user: UserDataDto, form: DailyworkCreateForm) ->
 
     Args:
         user (UserDataDto): ユーザ情報Dto
-        year (str): 年
-        month (str): 月
-        day (str): 日
-        start_hh (str): 開始時間(時)
-        start_mi (str): 開始時間(分)
-        end_hh (str): 終了時間(時)
-        end_mi (str): 終了時間(分)
-        rest_time (str): 休憩時間
-        note (str): 備考
+        form (DailyworkCreateForm): 日次勤怠登録Form
 
     Returns:
         bool: 登録処理成功の場合True、それ以外の場合False
@@ -132,8 +124,8 @@ def regist_daily_user_work_data(user: UserDataDto, form: DailyworkCreateForm) ->
         company_cd, division_cd, actual_work_date, rest_time)
 
     # 日別ユーザ勤怠情報を検索
-    from_date: datetime = datetime.datetime(year, month, day)
-    to_date: datetime = datetime.datetime(year, month, day + 1)
+    from_date: datetime = datetime.datetime(year, month, day, 0, 0, 0)
+    to_date: datetime = datetime.datetime(year, month, day, 23, 59, 59)
     daily_user_work_data_list = DailyUserWorkData.objects.filter(
         seq_user_id=user.seq_user_id, work_start_date__range=[from_date, to_date]).order_by("work_start_date")
 
