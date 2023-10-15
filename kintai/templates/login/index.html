@@ -23,10 +23,10 @@
     <form method="post" action="{% url 'login' %}">
       {% csrf_token %}
       <div class="mb-3">
-        <input id="seq_user_id" class="form-control bg-light placeholder" name="seq_user_id" placeholder="ユーザID" />
+        <input type="number" id="seq_user_id" class="form-control bg-light placeholder" name="seq_user_id" placeholder="ユーザID" required />
       </div>
       <div class="mb-3">
-        <input id="password" class="form-control bg-light placeholder" name="password" placeholder="パスワード" />
+        <input type="password" id="password" class="form-control bg-light placeholder" name="password" placeholder="パスワード" required />
       </div>
       <div class="mb-3">
         <input type="submit" class="btn btn-primary login-button bold" value="ログイン" />

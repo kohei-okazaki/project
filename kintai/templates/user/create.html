@@ -23,10 +23,10 @@
     <form method="post" action="{% url 'user_create' %}">
     {% csrf_token %}
       <div class="mb-3">
-        <input id="password" class="form-control bg-light placeholder" name="password" placeholder="パスワード" />
+        <input type="password" id="password" class="form-control bg-light placeholder" name="password" placeholder="パスワード" required />
       </div>
       <div class="mb-3">
-        <select id="company_cd" class="form-select" name="company_cd">
+        <select id="company_cd" class="form-select" name="company_cd" required>
           <option selected disabled value="" style="display:none;">企業コード</option>
           {% for mt in company_mt_list %}
           <option value={{ mt.company_cd }}>{{ mt.company_cd }} : {{ mt.name }}</option>
@@ -34,7 +34,7 @@
         </select>
       </div>
       <div class="mb-3">
-        <select id="division_cd" class="form-select" name="division_cd">
+        <select id="division_cd" class="form-select" name="division_cd" required>
           <option selected disabled value="" style="display:none;">部署コード</option>
           {% for mt in division_mt_list %}
           <option value={{ mt.division_cd }}>{{ mt.division_cd }} : {{ mt.name }}</option>

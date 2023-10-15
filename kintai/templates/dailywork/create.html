@@ -32,7 +32,7 @@
 
       <form method="get" action="{% url 'dailywork_create' %}">
         <div class="dailywork-yyyymm-area">
-          <select id="yyyymm" class="form-select" name="yyyymm" style="width: 110px;">
+          <select id="yyyymm" class="form-select" name="yyyymm" style="width: 110px;" required>
             {% for yyyymm in yyyymm_list %}
               {% if yyyymm == current_month %}
                 <option selected>{{ yyyymm }}</option>
@@ -113,7 +113,7 @@
               </td>
               <td>
                 <div class="d-flex align-items-center justify-content-center">
-                  <select class="form-select dailywork-time-input" name="start_hh">
+                  <select class="form-select dailywork-time-input" name="start_hh" required>
                     <option selected>{{ dto.work_start_date|date:"G" }}</option>
                     <option>0</option>
                     <option>1</option>
@@ -146,7 +146,7 @@
               </td>
               <td>
                 <div class="d-flex align-items-center justify-content-center">
-                  <select class="form-select dailywork-time-input" name="start_mi">
+                  <select class="form-select dailywork-time-input" name="start_mi" required>
                     <option selected>{{ dto.work_start_date|date:"i" }}</option>
                     <option>00</option>
                     <option>15</option>
@@ -160,7 +160,7 @@
               </td>
               <td>
                 <div class="d-flex align-items-center justify-content-center">
-                  <select class="form-select dailywork-time-input" name="end_hh">
+                  <select class="form-select dailywork-time-input" name="end_hh" required>
                     <option selected>{{ dto.work_end_date|date:"G" }}</option>
                     <option>0</option>
                     <option>1</option>
@@ -194,7 +194,7 @@
               </td>
               <td>
                 <div class="d-flex align-items-center justify-content-center">
-                  <select class="form-select dailywork-time-input" name="end_mi">
+                  <select class="form-select dailywork-time-input" name="end_mi" required>
                     <option selected>{{ dto.work_end_date|date:"i" }}</option>
                     <option>00</option>
                     <option>15</option>
@@ -206,9 +206,9 @@
               <td>
                 <div class="d-flex align-items-center justify-content-center" style="width: 80px;">
                   {% if dto.rest_time == None %}
-                    <input class="form-control bg-light placeholder" name="rest_time" placeholder="1.00" />
+                    <input class="form-control bg-light placeholder" name="rest_time" placeholder="1.00" required />
                   {% else %}
-                    <input class="form-control" name="rest_time" value={{ dto.rest_time }} />
+                    <input class="form-control" name="rest_time" value={{ dto.rest_time }} required />
                   {% endif %}
                 </div>
               </td>
@@ -233,7 +233,7 @@
               </td>
               <td>
                 <div class="d-flex align-items-center justify-content-center">
-                  <textarea class="form-control form-control-sm" name="note" rows="1">{{ dto.note }}</textarea>
+                  <textarea class="form-control form-control-sm" name="note" rows="1" maxlength="128">{{ dto.note }}</textarea>
                 </div>
               </td>
             </tr>
