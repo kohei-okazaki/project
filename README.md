@@ -52,11 +52,14 @@
 `pip3 install PyMySQL`
 
 # マイグレーション手順
-
 1. models.py にテーブル定義の Entity を記述
 2. プロジェクトフォルダまで「Anaconda Terminal」で移動
-3. `python manage.py makemigrations ${application_name}`
-4. `python manage.py migrate`
+3. VSCodeから「Make Migrate」を実行
+4. VSCodeから「Migrate」を実行
+
+以下、備忘録として残す
+`python manage.py makemigrations ${application_name}`
+`python manage.py migrate`
 
 # 管理ユーザ作成
 
