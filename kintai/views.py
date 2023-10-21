@@ -7,9 +7,10 @@ from django.urls import reverse
 from django.views.generic import TemplateView
 from kintai.contents.util.dto import UserDataDto
 from kintai.forms import DailyworkCreateForm, LoginForm, UserCreateForm, UserEditForm
-from kintai.contents.util import date_util, company_mt_service, division_mt_service
+from kintai.contents.util import date_util
 from kintai.contents.dailywork import dailywork_service
 from kintai.contents.user import user_service
+from kintai.contents.mt import company_mt_service, division_mt_service
 
 # Logger
 logger: logging.Logger = logging.getLogger(__name__)

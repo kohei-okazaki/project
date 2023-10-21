@@ -1,7 +1,8 @@
 import datetime
 import decimal
 from decimal import Decimal
-from kintai.contents.util import date_util, ontime_mt_service
+from kintai.contents.util import date_util
+from kintai.contents.mt import ontime_mt_service
 from kintai.contents.util.dto import BusinessCalendarMtDto, DailyUserWorkDataDto, DailyworkDto, OntimeMtDto, UserDataDto
 from kintai.forms import DailyworkCreateForm
 from kintai.models import BusinessCalendarMt, DailyUserWorkData

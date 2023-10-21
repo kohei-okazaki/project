@@ -1,6 +1,6 @@
+import datetime
 import decimal
 from kintai.models import BusinessCalendarMt, CompanyMt, DailyUserWorkData, DivisionMt, OntimeMt, UserData
-import datetime
 
 
 class UserDataDto:
