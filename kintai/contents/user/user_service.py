@@ -1,4 +1,5 @@
 from kintai.contents.util.dto import UserDataDto
+from kintai.contents.util import hash_util
 from kintai.models import UserData
 
 
@@ -27,11 +28,12 @@ def get_user_by_id_and_password(dto: UserDataDto) -> list:
     Returns:
         list: ユーザ情報Dtoリスト
     """
-
+    hash_password: str = hash_util.hash_256(dto.password)
     user_data_list: list = UserData.objects.filter(
-        seq_user_id=dto.seq_user_id, password=dto.password)
+        seq_user_id=dto.seq_user_id, password=hash_password)
 
-    dto_list: list = list(UserDataDto(user_data) for user_data in user_data_list)
+    dto_list: list = list(UserDataDto(user_data)
+                          for user_data in user_data_list)
 
     return dto_list
 
@@ -49,7 +51,7 @@ def to_user_data(dto: UserDataDto) -> UserData:
     user_data: UserData = UserData()
 
     user_data.seq_user_id = dto.seq_user_id
-    user_data.password = dto.password
+    user_data.password = hash_util.hash_256(dto.password)
     user_data.company_cd = dto.company_cd
     user_data.division_cd = dto.division_cd
     user_data.del_flg = dto.del_flg
